@@ -1,7 +1,5 @@
 package com.medopract.testscript;
 
-import java.awt.Window;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
