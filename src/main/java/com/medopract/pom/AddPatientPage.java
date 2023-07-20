@@ -17,8 +17,20 @@ public class AddPatientPage extends BaseClass {
 	@FindBy(xpath="(//a[text( )='Patients'])[1]")
 	WebElement patientsClick;
 	
-	@FindBy(xpath = "//input[@value='2023-07-06']")
+	@FindBy(xpath = "//div[@class='react-date-picker__inputGroup']")
 	WebElement birthDateField;
+	
+	@FindBy(css = "input[name='month'],[class='react-date-picker__inputGroup__input react-date-picker__inputGroup__month']")
+	WebElement monthField;
+	
+	@FindBy (css="input[name='day'],[class='react-date-picker__inputGroup__input react-date-picker__inputGroup__day']")
+	WebElement dayField;
+	
+	@FindBy(css = "input[name='year'],[class='react-date-picker__inputGroup__input react-date-picker__inputGroup__year']")
+	WebElement yearField;
+	
+	@FindBy(xpath = "//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
+	WebElement cancelNotification;
 	
 	@FindBy(xpath="//a[text( )='ADD PATIENT']")
 	WebElement addPatientClick;
@@ -62,20 +74,57 @@ public class AddPatientPage extends BaseClass {
 	@FindBy(id="fileButton")
 	WebElement selectImage;
 	
-	@FindBy(xpath="//button[text()='Save']")
+	@FindBy(xpath="(//div[@class='col-md-2 col-sm-2 col-5'])[1]")
 	WebElement saveButton;
 	
 	@FindBy(xpath="//button[text()='Capture photo']")
     WebElement capturePhoto;
 
-	@FindBy(xpath="//button[text()='Reset']")
+	@FindBy(xpath="(//div[@class='col-md-2 col-sm-2 col-5'])[2]")
 	WebElement resetButton;
 	
+	@FindBy(xpath="//div[text()='Patient Record created successfully!']")
+	WebElement createdSuccessfully;
+ 
+	@FindBy(xpath="//div[text()='Please provide required inputs']")
+	WebElement errorMessage;
 	
+	@FindBy(xpath = "//p[text()='Please enter valid name- Only Alphabets and spaces are allowed']")
+	WebElement nameErrorMsg;
+
+	@FindBy(xpath = "//p[text()='Mobile number must be 10 digits long valid number']")
+	WebElement mobileNoErrorMsg;
 	
+	@FindBy(xpath = "//span[@class='CreatePatientSidebar_patientId__3-vo7']")
+	WebElement patientId;
 	
 	public WebElement getPatientsClick() {
 		return patientsClick;
+	}
+	
+	public WebElement getnameErrorMsg() {
+		return nameErrorMsg;
+	}
+	
+	public WebElement getpatientId() {
+		return patientId;
+	}
+	
+	public WebElement getcancelNotification () {
+		return cancelNotification;
+	}
+	
+	public WebElement getErrorMessage() {
+		return errorMessage;
+	}
+	
+	public WebElement getMobileNoErrorMsg() {
+		return mobileNoErrorMsg;
+	}
+	
+	
+	public WebElement getCreatedSuccessfully() {
+		return createdSuccessfully;
 	}
 
 	public WebElement getAddPatientClick() {
@@ -88,6 +137,18 @@ public class AddPatientPage extends BaseClass {
 	
 	public WebElement getbirthDateField() {
 		return birthDateField;
+	}
+	
+	public WebElement getmonthField() {
+		return monthField;
+	}
+	
+	public WebElement getDayField() {
+		return dayField;
+	}
+	
+	public WebElement getYearField() {
+		return yearField;
 	}
 
 	public WebElement getPhoneNoField() {

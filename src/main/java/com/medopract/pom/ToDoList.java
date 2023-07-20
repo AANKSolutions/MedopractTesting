@@ -28,14 +28,31 @@ public class ToDoList {
 	@FindBy(xpath = "(//a[@title='Delete'])[1]")
 	WebElement deleteTask;
 
-	@FindBy(xpath = "//a[text()='View Completed Tasks']")
+	@FindBy(xpath = "//a[@class='todoList_Tasklink__1460g']")
     WebElement ViewCompletedTask;
 
-	@FindBy(xpath = "//a[text( )='View Open Tasks']")
+	@FindBy(xpath = "//a[@class='todoList_Tasklink__1460g']")
 	WebElement ViewOpenTask;
 	
-	@FindBy(xpath = "//input[@value='07/14/2023, 12:00 AM']")
-	WebElement DateSelect;
+	@FindBy(xpath = "//input[@class='todoList_todotime__1bSAv']")
+	WebElement dateAndTime;
+	
+	@FindBy(xpath = "//div[@class='react-datepicker__day react-datepicker__day--025']")
+	WebElement dateSelect;
+	
+	@FindBy(xpath="(//li[@class='react-datepicker__time-list-item '])[3]")
+	WebElement timeSelect;
+	
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__content css-1ad3zal']")
+	WebElement notification;
+	
+	@FindBy(xpath = "//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
+	WebElement cancelNotification;
+	
+	@FindBy(xpath = "//span[@class='todoList_descriptionerrorshow__1eD27']")
+	WebElement errorMsg;
+	
+	
 	
 
 	public WebElement getclickingPlusSign() {
@@ -71,7 +88,27 @@ public class ToDoList {
 	}
 
 	public WebElement getDateSelect() {
-		return DateSelect;
+		return dateSelect;
+	}
+	
+	public WebElement getTimeSelect() {
+		return timeSelect;
+	}
+	
+	public WebElement getdateAndTime() {
+		return dateAndTime;
+	}
+	
+	public WebElement getNotification() {
+		return notification;
+	}
+	
+	public WebElement getcancelNotification() {
+		return cancelNotification;
+	}
+	
+	public WebElement geterrorMsg() {
+		return errorMsg;
 	}
 	
 }

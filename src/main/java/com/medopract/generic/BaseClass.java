@@ -4,7 +4,9 @@ package com.medopract.generic;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class BaseClass{
@@ -21,6 +23,6 @@ public class BaseClass{
 	    PropertyConfigurator.configure("Log4j.properties");		
 			return driver;	
 	}
-	
+
 	
 }

@@ -15,7 +15,7 @@ public class HomePageAppointment {
 	}
 
 	@FindBy(xpath ="//div[contains(@class,'nextAppointment_addition__3AA9I')]")
-	WebElement Clickingplus;
+	WebElement ClickingSigns;
 
 	@FindBy(name = "firstName")
 	WebElement NameField;
@@ -44,10 +44,22 @@ public class HomePageAppointment {
 	@FindBy(xpath="//button[@title='Send Reminder SMS']")
 	WebElement SMSReminder;
 	
+	@FindBy(xpath="(//span[@class='nextAppointment_descriptionerrorshow__2IHdw'])[1]")
+	WebElement errorMsg;
+	
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
+	WebElement cancelNotification;
+	
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__content css-1ad3zal']")
+	WebElement Notification;
 
-
-	public WebElement getClickingplus() {
-		return Clickingplus;
+	
+	public WebElement getClickingSigns() {
+		return ClickingSigns;
+	}
+	
+	public WebElement geterrorMsg() {
+		return errorMsg;
 	}
 
 	public WebDriver getDriver() {
@@ -88,6 +100,15 @@ public class HomePageAppointment {
 
 	public WebElement getSMSReminder() {
 		return SMSReminder;
+	}
+	
+	public WebElement getNotification() {
+		return Notification;
+	}
+
+
+	public WebElement getcancelNotification() {
+		return cancelNotification;
 	}
 
 	

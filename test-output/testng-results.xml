@@ -1,37 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="7" passed="6" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-07-12T15:44:03 IST" name="Default suite" finished-at="2023-07-12T15:44:53 IST" duration-ms="50767">
+  <suite started-at="2023-07-19T22:36:05 IST" name="Default suite" finished-at="2023-07-19T22:37:26 IST" duration-ms="80285">
     <groups>
     </groups>
-    <test started-at="2023-07-12T15:44:03 IST" name="Default test" finished-at="2023-07-12T15:44:53 IST" duration-ms="50767">
-      <class name="com.medopract.testscript.ViewPrescriptionTest">
-        <test-method is-config="true" signature="OpenApplication()[pri:0, instance:com.medopract.testscript.ViewPrescriptionTest@dd05255]" started-at="2023-07-12T15:44:03 IST" name="OpenApplication" finished-at="2023-07-12T15:44:14 IST" duration-ms="11737" status="PASS">
+    <test started-at="2023-07-19T22:36:05 IST" name="Default test" finished-at="2023-07-19T22:37:26 IST" duration-ms="80285">
+      <class name="com.medopract.testscript.ToDoListTest">
+        <test-method is-config="true" signature="OpenApplication()[pri:0, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:36:05 IST" name="OpenApplication" finished-at="2023-07-19T22:36:15 IST" duration-ms="9965" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- OpenApplication -->
-        <test-method signature="viewPrescription()[pri:1, instance:com.medopract.testscript.ViewPrescriptionTest@dd05255]" started-at="2023-07-12T15:44:14 IST" name="viewPrescription" finished-at="2023-07-12T15:44:27 IST" duration-ms="12454" status="PASS">
+        <test-method signature="Todolist()[pri:1, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:36:15 IST" name="Todolist" finished-at="2023-07-19T22:36:37 IST" duration-ms="21749" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- viewPrescription -->
-        <test-method is-config="true" signature="logout()[pri:0, instance:com.medopract.testscript.ViewPrescriptionTest@dd05255]" started-at="2023-07-12T15:44:27 IST" name="logout" finished-at="2023-07-12T15:44:27 IST" duration-ms="80" status="PASS">
+        </test-method> <!-- Todolist -->
+        <test-method signature="withoutTaskDetails()[pri:2, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:36:37 IST" name="withoutTaskDetails" finished-at="2023-07-19T22:36:46 IST" duration-ms="9213" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- withoutTaskDetails -->
+        <test-method signature="withoutDueDate()[pri:3, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:36:46 IST" name="withoutDueDate" finished-at="2023-07-19T22:37:02 IST" duration-ms="15435" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- withoutDueDate -->
+        <test-method signature="deleteTask()[pri:4, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:37:02 IST" name="deleteTask" finished-at="2023-07-19T22:37:06 IST" duration-ms="4202" status="FAIL">
+          <exception class="org.openqa.selenium.InvalidArgumentException">
+            <message>
+              <![CDATA[invalid argument: No dialog is showing
+  (Session info: chrome=115.0.5790.98)
+Build info: version: '4.10.0', revision: 'c14d967899'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '20.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [376fa1f9f198b737ddf2b8bbc2590df4, findElement {using=xpath, value=//div[@class='react-toast-notifications__toast__content css-1ad3zal']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.98, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\Users\vashw\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:52339}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52339/devtoo..., se:cdpVersion: 115.0.5790.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 376fa1f9f198b737ddf2b8bbc2590df4]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.InvalidArgumentException: invalid argument: No dialog is showing
+  (Session info: chrome=115.0.5790.98)
+Build info: version: '4.10.0', revision: 'c14d967899'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '20.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [376fa1f9f198b737ddf2b8bbc2590df4, findElement {using=xpath, value=//div[@class='react-toast-notifications__toast__content css-1ad3zal']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.98, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\Users\vashw\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:52339}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52339/devtoo..., se:cdpVersion: 115.0.5790.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 376fa1f9f198b737ddf2b8bbc2590df4
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:484)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:199)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:132)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:51)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:531)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:350)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at jdk.proxy2/jdk.proxy2.$Proxy20.getText(Unknown Source)
+at com.medopract.testscript.ToDoListTest.deleteTask(ToDoListTest.java:136)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.InvalidArgumentException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteTask -->
+        <test-method signature="CompletedTask()[pri:5, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:37:06 IST" name="CompletedTask" finished-at="2023-07-19T22:37:14 IST" duration-ms="8261" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CompletedTask -->
+        <test-method signature="viewCompletedTask()[pri:6, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:37:14 IST" name="viewCompletedTask" finished-at="2023-07-19T22:37:18 IST" duration-ms="4126" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- viewCompletedTask -->
+        <test-method signature="viewOpenTask()[pri:7, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:37:18 IST" name="viewOpenTask" finished-at="2023-07-19T22:37:25 IST" duration-ms="7183" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- viewOpenTask -->
+        <test-method is-config="true" signature="logout()[pri:0, instance:com.medopract.testscript.ToDoListTest@3d285d7e]" started-at="2023-07-19T22:37:25 IST" name="logout" finished-at="2023-07-19T22:37:26 IST" duration-ms="109" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- logout -->
-        <test-method is-config="true" signature="OpenApplication()[pri:0, instance:com.medopract.testscript.ViewPrescriptionTest@dd05255]" started-at="2023-07-12T15:44:27 IST" name="OpenApplication" finished-at="2023-07-12T15:44:38 IST" duration-ms="10931" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- OpenApplication -->
-        <test-method signature="patientDetails()[pri:2, instance:com.medopract.testscript.ViewPrescriptionTest@dd05255]" started-at="2023-07-12T15:44:38 IST" name="patientDetails" finished-at="2023-07-12T15:44:53 IST" duration-ms="15408" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- patientDetails -->
-        <test-method is-config="true" signature="logout()[pri:0, instance:com.medopract.testscript.ViewPrescriptionTest@dd05255]" started-at="2023-07-12T15:44:53 IST" name="logout" finished-at="2023-07-12T15:44:53 IST" duration-ms="128" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- logout -->
-      </class> <!-- com.medopract.testscript.ViewPrescriptionTest -->
+      </class> <!-- com.medopract.testscript.ToDoListTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

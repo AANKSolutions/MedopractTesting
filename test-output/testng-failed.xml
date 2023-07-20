@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.medopract.testscript.ViewPrescriptionTest">
+      <class name="com.medopract.testscript.ToDoListTest">
         <methods>
-          <include name="patientDetails"/>
-          <include name="logout"/>
+          <include name="deleteTask"/>
           <include name="OpenApplication"/>
+          <include name="logout"/>
         </methods>
-      </class> <!-- com.medopract.testscript.ViewPrescriptionTest -->
+      </class> <!-- com.medopract.testscript.ToDoListTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

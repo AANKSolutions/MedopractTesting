@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class FileLib {
+/**public class FileLib {
 	//WebDriver driver;
 	Properties p;
 
@@ -31,4 +31,4 @@ public class FileLib {
 		String pw = p.getProperty("Password");
 		return pw;
 	}
-}
+}**/

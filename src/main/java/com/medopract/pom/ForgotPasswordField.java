@@ -26,9 +26,20 @@ public class ForgotPasswordField {
 	
 	@FindBy(xpath = "//button[text()=' Got it!']")
 	WebElement gotItButton;
-
-	public WebDriver driver;
 	
+	@FindBy(xpath = "//p[@class='authCommon_title2__3cJid']")
+	WebElement forgetPassPage;
+	
+	@FindBy(xpath = "//p[@class='authCommon_title2__3cJid']")
+	WebElement backLoginPage;
+	
+	public WebElement getForgotPassPage() {
+		return forgetPassPage;
+	}
+
+	public WebElement getbackLoginPage() {
+		return backLoginPage;
+	}
 
 	public WebElement getForgotPassword() {
 		return forgotpassword;

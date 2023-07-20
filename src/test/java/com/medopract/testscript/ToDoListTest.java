@@ -5,16 +5,17 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.medopract.generic.BaseClass;
 import com.medopract.pom.LoginPage;
 import com.medopract.pom.ToDoList;
 
 public class ToDoListTest extends BaseClass {
-	
-	@BeforeMethod
+
+	@BeforeClass
 	public void OpenApplication() throws InterruptedException {
 		driver=OpenBrowser();
 		driver.manage().window().maximize();  
@@ -24,86 +25,155 @@ public class ToDoListTest extends BaseClass {
 		l.getGotItButton().click();
 		Thread.sleep(2000);
 		l.getUsername().sendKeys("ashwinkv016"); 
+		logger.info("Entered UserName Field");
 		l.getPassword().sendKeys("ashwinkv016");
+		logger.info("Entered Password Field");
 		Thread.sleep(2000);
 		l.getSubmitButton().submit();
-		Thread.sleep(4000);          
+		logger.info("Clicked Submit Button");
+		Thread.sleep(2000); 
+
+		String actual = null;
+		try {
+			if(l.getaccInfo().isDisplayed())
+				actual="success";
+		}
+		catch(Exception e) {
+			actual="failure";
+		}
+		Assert.assertEquals(actual, "success");
 	}
 
 	@Test(priority=1)
 	public void Todolist() throws InterruptedException {
 
 		ToDoList tdl = new ToDoList(driver);
+		JavascriptExecutor j=(JavascriptExecutor)driver;
+		j.executeScript("window.scrollBy(0,250)");
+		Thread.sleep(2000);
 		tdl.getclickingPlusSign().click();
-		logger.debug("Clicking plus Sign");
+		logger.info("Clicking plus Sign");
+		Thread.sleep(2000);
 		tdl.getTaskfield().sendKeys("Operation");
-		logger.debug("Entering Value");
+		logger.info("Entering Value");
 		Thread.sleep(4000);
+		tdl.getdateAndTime().click();
+		logger.info("Clicked Date and Time");
+		Thread.sleep(2000);
+		tdl.getDateSelect().click();
+		Thread.sleep(2000);
+		tdl.getTimeSelect().click();
+		j.executeScript("window.scrollBy(0,250)");
+		Thread.sleep(2000);
 		tdl.getAddtask().click();
-		logger.debug("Clicked on Add Task Button");
+		logger.info("Clicked on Add Task Button");
 		Thread.sleep(5000);
-		tdl.getClickingComplete().click();
-		logger.debug("Clicked on Clicking Complete");
+
+		String expectedResult="Tasks record added";
+		String actualResult=tdl.getNotification().getText();
+		Assert.assertEquals(actualResult, expectedResult);
+
+		tdl.getcancelNotification().click();
+		Thread.sleep(2000);
+		logger.info("Clicked Cancel Notification");
 	}
 
 	@Test(priority=2)
 	public void withoutTaskDetails() throws InterruptedException {
-
 		ToDoList tdl = new ToDoList(driver);
-		tdl.getclickingPlusSign().click();
-		logger.debug("Clicking plus Sign");
-		tdl.getTaskfield().sendKeys(" ");
-		logger.debug("Entering Value");
+		tdl.getTaskfield().clear();
+		logger.info("Entering Value");
 		Thread.sleep(4000);
 		tdl.getAddtask().click();
-		logger.debug("Clicked on Add Task Button");
+		logger.info("Clicked on Add Task Button");
 		Thread.sleep(5000);
-		tdl.getClickingComplete().click();
-		logger.debug("Clicked on Clicking Complete");
 
+		String actual = null;
+		try {
+			if(tdl.geterrorMsg().isDisplayed())
+				actual="success";
+		}
+		catch(Exception e) {
+			actual="failure";
+		}
+		Assert.assertEquals(actual, "success");
 	}
+
 	@Test(priority=3)
 	public void withoutDueDate() throws InterruptedException {
 
 		ToDoList tdl = new ToDoList(driver);
-		tdl.getclickingPlusSign().click();
-		logger.debug("Clicking plus Sign");
 		tdl.getTaskfield().sendKeys("Operation");
-		logger.debug("Entering Value");
+		logger.info("Entering Value");
 		Thread.sleep(4000);
 		tdl.getcancelWithoutDueDate().click();
-		logger.debug("Cancelled Due Date");
+		logger.info("Cancelled Due Date");
 		Thread.sleep(4000);
 		tdl.getAddtask().click();
-		logger.debug("Clicked on Add Task Button");
+		logger.info("Clicked on Add Task Button");
 		Thread.sleep(5000);
-		tdl.getClickingComplete().click();
-		logger.debug("Clicked on Clicking Complete");
+
+		String expectedResult="Tasks record added";
+		String actualResult=tdl.getNotification().getText();
+		Assert.assertEquals(actualResult, expectedResult);
+
+		tdl.getcancelNotification().click();
+		Thread.sleep(2000);
+		logger.info("Clicked Cancel Notification");
 	}
+	
 	@Test(priority=4)
 	public void deleteTask() throws InterruptedException, AWTException {
-		
 		ToDoList tdl = new ToDoList(driver);
 		tdl.getDeleteTask().click();
 		Thread.sleep(4000);
-		logger.debug("Clicking on Delete Task");
+		logger.info("Clicking on Delete Task");
 		Robot r=new Robot();
 		r.keyPress(KeyEvent.VK_ENTER);
 		logger.info("Clicking Cancel popup");
+		
+		String expectedResult="No record available with tasks ID :64b8130a535d4697ac7a57e7";
+		String actualResult=tdl.getNotification().getText();
+		Assert.assertEquals(actualResult, expectedResult);
+
+		tdl.getcancelNotification().click();
+		Thread.sleep(2000);
+		logger.info("Clicked Cancel Notification");
 	}
-	
+
 	@Test(priority = 5)
+	public void CompletedTask() throws InterruptedException {
+		ToDoList tdl=new ToDoList(driver);
+		Thread.sleep(2000);
+		JavascriptExecutor j=(JavascriptExecutor)driver;
+		j.executeScript("window.scrollBy(0,250)");
+		Thread.sleep(2000);
+		tdl.getClickingComplete().click();
+		Thread.sleep(2000);
+		logger.info("Clicking on View Completed Task");
+
+
+		String expectedResult="Tasks record updated as completed";
+		String actualResult=tdl.getNotification().getText();
+		Assert.assertEquals(actualResult, expectedResult);
+
+		tdl.getcancelNotification().click();
+		Thread.sleep(2000);
+		logger.info("Clicked Cancel Notification");
+	}
+
+	@Test(priority = 6)
 	public void viewCompletedTask() throws InterruptedException {
 		ToDoList tdl=new ToDoList(driver);
 		Thread.sleep(2000);
 		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,500)");
+		j.executeScript("window.scrollBy(0,750)");
 		Thread.sleep(2000);
 		tdl.getViewCompletedTask().click();
 		logger.info("Clicking on View Completed Task");
 	}
-	
-	@Test(priority =6)
+
+	@Test(priority =7)
 	public void viewOpenTask() throws InterruptedException {
 		ToDoList tdl=new ToDoList(driver);
 		Thread.sleep(2000);
@@ -118,9 +188,10 @@ public class ToDoListTest extends BaseClass {
 		tdl.getViewOpenTask().click();
 		logger.info("Clicking on View Completed Task");
 	}
-	
-	@AfterMethod
-	public void CloseBrowser() {
+
+	@AfterClass
+	public void logout() {
 		driver.close();
+		logger.info("Closed Browser");
 	}
 }

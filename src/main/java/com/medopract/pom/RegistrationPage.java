@@ -6,14 +6,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class RegistrationPage {
-	
+
 
 	public WebDriver driver;
 
 	public RegistrationPage(WebDriver driver){
-		
+
 		PageFactory.initElements(driver, this);	
-		
+
 	}
 	@FindBy(xpath = "//a[text()='Register Now']")
 	WebElement ClickRegisterNow;
@@ -39,9 +39,6 @@ public class RegistrationPage {
 	@FindBy(xpath="//button[text()='Register']")
 	WebElement clickRegisterButton;
 
-	@FindBy(xpath="//button[text()='OK']")
-	WebElement successMessage;
-
 	@FindBy(xpath = "(//div[@class='col-sm-12'])[2]/..")
 	WebElement clickImAlreadyUser;
 
@@ -51,53 +48,90 @@ public class RegistrationPage {
 	@FindBy(xpath = "//button[text()=' Got it!']")
 	WebElement gotItButton;
 
+	@FindBy(xpath = "//button[@class='register_okBtn__3PRzY']")
+	WebElement okButton;
+
+	@FindBy(xpath="//span[@class='register_modalText__2Q3RR']")
+	WebElement registrationSuccessfulMsg;
+
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
+	WebElement cancelNotification;
 	
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__content css-1ad3zal']")
+	WebElement errorNotification;
+	
+	@FindBy(xpath="//p[text()='Confirm Username must be 8-16 Characters, Alphabets, Numbers and ._%+-@ allowed']")
+	WebElement confirmUnErrorNotification;
+	
+	@FindBy(xpath="//p[text()='Please check this box if you want to Proceed!']")
+	WebElement TermsErrorNotification;
+	
+	
+	public WebElement getconfirmUnErrorNotification() {
+		return confirmUnErrorNotification;
+	}
+
+	public WebElement getTermsErrorNotification() {
+		return TermsErrorNotification;
+	}
 
 	public WebElement getClickRegisterNow() {
 		return ClickRegisterNow;
 	}
-	
+
+	public WebElement geterrorNotification() {
+		return errorNotification;
+	}
+
+
+	public WebElement getcancelNotification() {
+		return cancelNotification;
+	}
+
+	public WebElement getregistrationSuccessfulMsg() {
+		return registrationSuccessfulMsg;
+	}
+
 	public WebElement getnameField() {
 		return nameField;
 	}
-	
+
 	public WebElement getemailField() {
 		return emailField;
 	}
-	
+
 	public WebElement getmobileField() {
 		return mobileField;
 	}
-	
+
 	public WebElement getuserNameField() {
 		return userNameField;
 	}
-	
+
 	public WebElement getconfirmUserNameField() {
 		return confirmUserNameField;
 	}
-	
+
 	public WebElement getagreetermCheckBox() {
 		return agreetermCheckBox;
 	}
-	
+
 	public WebElement getclickRegisterButton(){
-        return clickRegisterButton;
-}
-	
-	public WebElement getsuccessMessage(){
-        return successMessage;
-}
-		
+		return clickRegisterButton;
+	}
+
 	public WebElement getclickImAlreadyUser(){
-        return clickImAlreadyUser;
-}
+		return clickImAlreadyUser;
+	}
 	public WebElement getclickHelp(){
-        return clickHelp;
-}
-	
+		return clickHelp;
+	}
+
 	public WebElement getGotItButton() {
 		return gotItButton;
 	}	
-	
+
+	public WebElement getOkButton() {
+		return okButton;
+	}
 }

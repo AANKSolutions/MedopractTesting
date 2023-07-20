@@ -14,31 +14,44 @@ public class ViewPrescriptionPage {
 	@FindBy(xpath="(//a[text()='Prescription'])[1]")
 	WebElement prescriptionsLink;
 	
-	@FindBy(xpath="//a[text()='VIEW PRESCRIPTIONS']")
+	@FindBy(xpath="(//a[text()='VIEW PRESCRIPTIONS'])[1]")
 	WebElement viewPrescriptionsLink;
 	
-	@FindBy(name="patientname")
+	@FindBy(name="patientname")        
 	WebElement patientNameField;
 	
-	@FindBy(xpath="(//div[@class='ViewPrescription_suggestions__JcWfc'])[1]")
+	@FindBy(xpath="//li[@class='ViewPrescription_suggestion__3OklH'][1]")
 	WebElement patientNameFieldSugg;
 	
-	@FindBy(xpath="//div[@class='ViewPrescription_patientList__2wK1Y row'][1]")
+	@FindBy(xpath="(//div[@class='ViewPrescription_patientList__2wK1Y row'])[1]")
 	WebElement prescriptionDetails;
 	
 	@FindBy(xpath="//a[text()='Back']")
 	WebElement backBtn;
-	
+
 	@FindBy(xpath="//a[text()='Go to Patient Details']")
 	WebElement goToPatientDetails;
+
+	@FindBy(xpath="(//div[@class='SavePrescriptionPopUp_rowWrapper__1R7Vf'])[1]")
+	WebElement viewPrescriptionsuccessful;
+	
+	@FindBy(xpath="//a[text()='VIEW/EDIT']")
+	WebElement patientDetailsPage;
 	
 	public WebElement getPrescriptionsLink(){
 	return prescriptionsLink;
+}
+
+	public WebElement getpatientDetailsPage(){
+	return patientDetailsPage;
 }
 	
 	public WebElement getviewPrescriptionsLink(){
 	return viewPrescriptionsLink;
 }
+	public WebElement getviewPrescriptionsuccessful(){
+		return viewPrescriptionsuccessful;
+	}
 	
 	public WebElement getpatientNameField(){
 	return  patientNameField;

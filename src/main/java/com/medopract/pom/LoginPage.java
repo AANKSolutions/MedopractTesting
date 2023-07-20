@@ -26,8 +26,35 @@ public LoginPage(WebDriver driver){
 	@FindBy(xpath = "//button[text()=' Got it!']")
 	WebElement gotItButton;
 	
+	@FindBy(xpath = "//div[@class='col-md-8']")
+	WebElement accInfo;
+	
+	@FindBy(xpath="//input[@class='authCommon_checkbox__3oYxx']")
+	WebElement rememberMeBtn;
+	
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__content css-1ad3zal']")
+	WebElement errorMsgNotification;
+	
+
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
+	WebElement cancelNotification;
+ 
+  
+	
 	public WebElement getUsername() {
 		return UsernameField;
+	}
+	
+	public WebElement geterrorMsgNotification() {
+		return errorMsgNotification;
+	}
+	
+	public WebElement getcancelNotification() {
+		return cancelNotification;
+	}
+	
+	public WebElement getaccInfo() {
+		return accInfo;
 	}
 	
 	public WebElement getPassword() {
@@ -44,6 +71,10 @@ public LoginPage(WebDriver driver){
 	
 	public WebElement getGotItButton() {
 		return gotItButton;
+	}
+	
+	public WebElement getrememberMeBtn() {
+		return rememberMeBtn;
 	}
 	
 	}

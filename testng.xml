@@ -7,7 +7,7 @@
   <test thread-count="5" name="Test">
 	  
     <classes>
-		<class name="com.medopract.testscript.AddPatientTest"/>
+		<class name="com.medopract.testscript.AddPrescriptionTest"/>
      
     </classes>
   </test> <!-- Test -->

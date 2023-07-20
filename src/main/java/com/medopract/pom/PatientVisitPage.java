@@ -24,11 +24,14 @@ public class PatientVisitPage {
 	@FindBy(name="primarycomplain")
 	WebElement primaryComplaint;
 
-	@FindBy(xpath="//a[@class='PatientVisit_addsymtoms__1b_WG ']")
+	@FindBy(xpath="(//a[text()='+'])[1]")
 	WebElement clickingSymptomsPlusSign;
 
 	@FindBy(name="symtomsIndicationsInput")
 	WebElement symptoms;
+	
+	@FindBy(xpath = "//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
+	WebElement cancelNotification;
 
 	@FindBy(xpath = "//a[@class='PatientVisit_systomremove__1kpoS']")
 	WebElement symptomsDelete;
@@ -48,19 +51,19 @@ public class PatientVisitPage {
 	@FindBy(xpath = "//a[@class='PatientVisit_invsremove__1fW0V']")
 	WebElement investigationDelete;
 
-	@FindBy(xpath="//a[@class='PatientVisit_addinvestigationtests__3VHP_ PatientVisit_indication150__I0XhM']")
+	@FindBy(xpath="(//a[text()='+'])[2]")
 	WebElement clickingInvestigationPlusSign;
 
 	@FindBy(name="clinicalObservation")
 	WebElement clinicalObservation;
 
-	@FindBy(name="diagnosisRemark")
+	@FindBy(name="diagnosisRemark")              
 	WebElement diagnosisRemark;
 
-	@FindBy(xpath="//a[@class=' PatientVisit_buttonscom__2NWJ0']")
+	@FindBy(xpath="(//div[@class='col-md-2 col-sm-2'])[1]")
 	WebElement saveButton;
 
-	@FindBy(xpath="//a[@class='PatientVisit_buttonscom__2NWJ0']")
+	@FindBy(xpath="(//div[@class='col-md-2 col-sm-2'])[3]")
 	WebElement followup;
 
 	@FindBy(xpath="//input[@name='visitReason']")
@@ -69,8 +72,14 @@ public class PatientVisitPage {
 	@FindBy(xpath="//a[text( )='Add Appointment']")
 	WebElement addAppointment;
 
-	@FindBy(xpath = "//div[@class='react-datepicker-wrapper']")
-	WebElement dateAndTime;
+	@FindBy(xpath = "(//input[@class='PatientVisit_followupInput__3tX-8'])[2]")
+	WebElement dateAndTimeFollowUp;
+	
+	@FindBy(xpath = "//div[@class='react-datepicker__day react-datepicker__day--014']")
+	WebElement datePickFollowUp;
+	
+	@FindBy(xpath = "(//li[@class='react-datepicker__time-list-item '])[2]")
+	WebElement timePickFollowUp;
 
 	@FindBy(xpath="//a[@class='PatientVisit_addnewpatient__3XoyA']")
 	WebElement addNewPatientHyperLink;
@@ -78,20 +87,42 @@ public class PatientVisitPage {
 	@FindBy(id="fileButton")
 	WebElement resultAndDocument;
 	
-	@FindBy(xpath="(//input[@class='PatientVisit_followupInput__3tX-8'])[2]")
-	WebElement followUpDateAndTime;
-	
-	@FindBy(xpath="//div[@class='react-datepicker__day react-datepicker__day--025 react-datepicker__day--selected']")
-	WebElement datePickFollowUp;
-	
-	@FindBy(xpath="//li[text()='10:00 AM']")
-	WebElement timePickFollowUp;
 	
 	@FindBy(xpath = "//a[text()='Cancel']")
 	WebElement cancelBtn;
+	
+	@FindBy(xpath="//div[text()='Please add Primary complaint']")
+	WebElement errorMessage;
+	
+	@FindBy(xpath="//div[text()='Patient visit added successfully!']")
+	WebElement successMessage;
+	
+	@FindBy(xpath="//div[@class='CreatePatient_content__5FiiA container-fluid']")
+	WebElement addPatientPage;
+	
+	@FindBy(xpath = "//div[text()='Appointment added Successfully']")
+	WebElement followNotification;
+	
+	
 
 	public WebElement getPatientsClick() {
 		return patientsClick;
+	}
+	
+	public WebElement getfollowNotification() {
+		return followNotification;
+	}
+	
+	public WebElement getaddPatientPage() {
+		return addPatientPage;
+	}
+	
+	public WebElement getsuccessMessage() {
+		return successMessage;
+	}
+
+	public WebElement geterrorMessage() {
+		return errorMessage;
 	}
 
 	public WebElement getPatientvisitClick() {
@@ -169,8 +200,8 @@ public class PatientVisitPage {
 		return visitReason;
 	}
 
-	public WebElement getdateAndTime() {
-		return dateAndTime;
+	public WebElement getdateAndTimeFollowUp() {
+		return dateAndTimeFollowUp;
 	}
 
 	public WebElement getaddNewPatientHyperLink() {
@@ -179,10 +210,6 @@ public class PatientVisitPage {
 
 	public WebElement getresultAndDocument() {
 		return resultAndDocument;
-	}
-	
-	public WebElement getfollowUpDateAndTime() {
-		return followUpDateAndTime;
 	}
 	
 	public WebElement getdatePickFollowUp() {
@@ -195,5 +222,9 @@ public class PatientVisitPage {
 	
 	public WebElement getcancelBtn() {
 		return cancelBtn;
+	}
+	
+	public WebElement getcancelNotification() {
+		return cancelNotification;
 	}
 }

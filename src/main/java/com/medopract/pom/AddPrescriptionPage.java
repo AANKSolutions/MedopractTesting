@@ -17,10 +17,10 @@ public class AddPrescriptionPage {
 	@FindBy(name="patientname")
 	WebElement patientNameField;
 	
-	@FindBy(xpath="//div[@class='AddPrescription_suggestions__YcsGl']")
+	@FindBy(xpath="(//li[@class='AddPrescription_suggestion__3HFdG'])[2]")
 	WebElement patientNameSuggestion;
 	
-	@FindBy(name="email")
+	@FindBy(name="email")                         
 	WebElement emailField;
 	
 	@FindBy(xpath="//a[@class='AddPrescription_addinvestigationtests__BMTsR ']")
@@ -47,23 +47,51 @@ public class AddPrescriptionPage {
 	@FindBy(xpath = "//button[@class='AddPrescription_okBtn__uL1l0']")
     WebElement yesButtonField;
 	
-	@FindBy(xpath="//button[@class='AddPrescription_NoBtn___ATps']")
+	@FindBy(xpath="//button[@class='AddPrescription_NoBtn___ATps']")           
 	WebElement noButtonField;
 	
 	@FindBy(xpath="//a[@class='AddPrescription_systomremove__3o7gS']")
 	WebElement deleteMedicine;
 	
-	@FindBy(xpath = "(//button[@class='SavePrescriptionPopUp_buttonscom__2WmCJ'])[1]")
+	@FindBy(xpath = "//button[text()='Print']")
 	WebElement printPrescription;
 	
-	@FindBy(xpath="(//button[@class='SavePrescriptionPopUp_buttonscom__2WmCJ'])[2]")
+	@FindBy(xpath="//button[text()='Download']")
 	WebElement downloadPrescription;
 	
 	@FindBy(xpath="//a[@class='SavePrescriptionPopUp_buttonscom__2WmCJ']")
 	WebElement prescriptionBackBtn;
+	
+	@FindBy(xpath="//div[text()='Please add medicines']")
+	WebElement errorMessage;
+	
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__content css-1ad3zal']")
+	WebElement medicineErrorMsg;
+	
+	@FindBy(xpath="//div[text()='Prescription created successfully!']")
+	WebElement successMessage;
+	
+	@FindBy(xpath="//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
+	WebElement cancelNotification;
 
 	public WebElement getclickPrescription() {
 		return clickPrescription;
+	}
+	
+	public WebElement getcancelNotification() {
+		return cancelNotification;
+	}
+	
+	public WebElement getmedicineErrorMsg() {
+		return medicineErrorMsg;
+	}
+	
+	public WebElement getsuccessMessage() {
+		return successMessage;
+	}
+
+	public WebElement geterrorMessage() {
+		return errorMessage;
 	}
 
 	public WebElement getPatientNameField() {

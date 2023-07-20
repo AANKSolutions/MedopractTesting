@@ -1,29 +1,23 @@
 package com.medopract.testscript;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import com.medopract.generic.BaseClass;
 import com.medopract.pom.ForgotPasswordField;
-import com.medopract.pom.LoginPage;
+
 
 public class ForgetPasswordTest extends BaseClass {
 
-	@BeforeMethod
+	@BeforeClass
 	public void OpenApplication() throws InterruptedException {
 		driver=OpenBrowser();
 		driver.manage().window().maximize();  
 		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
 		logger.info("Navigated to Application URL");
-		LoginPage l=new LoginPage(driver);
-		l.getGotItButton().click();
-		Thread.sleep(2000);
-		l.getUsername().sendKeys("ashwinkv016"); 
-		l.getPassword().sendKeys("ashwinkv016");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();
-		Thread.sleep(4000);     
+		Thread.sleep(3000);
+		
 	}
 
 	@Test(priority=1)
@@ -38,21 +32,44 @@ public class ForgetPasswordTest extends BaseClass {
 		Thread.sleep(3000);
 		//fpf.getResetButtonClick().click();
 		logger.info("Clicked On ResetButton");
+		
+		String actual=null;
+		try {
+			if(fpf.getForgotPassPage().isDisplayed())
+			actual="success";
+			logger.info("Forget Password Page is displayed");
+		}
+		catch(Exception e) {
+			actual="failure";
+			logger.info("Forget Password Page is not displayed");
+		}
+		Assert.assertEquals(actual, "success");
 	}
 
 	@Test(priority=2)
 	public void BackLoginPage() throws InterruptedException {
 		ForgotPasswordField fpf = new ForgotPasswordField(driver);
-		//fpf.getGotItButton().click();
-		fpf.getForgotPassword().click();
-		logger.debug("Clicked On Forget Password");
-		Thread.sleep(3000);
 		fpf.getBackLoginPage().click();
+		Thread.sleep(3000);
+		logger.info("Clicked On Back Login Page");
+		String actual=null;
+		try {
+			if(fpf.getbackLoginPage().isDisplayed())
+			actual="success";
+			logger.info("LoginPage is displayed");
+		}
+		catch(Exception e) {
+			actual="failure";
+			logger.info(" LoginPage is not displayed");
+		}
+		Assert.assertEquals(actual, "success");
+		
 
 	}
-	@AfterMethod
-	public void CloseBrowser() {
+	@AfterClass
+	public void logout() {
 		driver.close();
+		logger.info("Closed Browser");
 	}
 }
 
