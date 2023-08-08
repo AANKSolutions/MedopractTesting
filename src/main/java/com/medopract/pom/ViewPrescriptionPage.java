@@ -38,16 +38,17 @@ public class ViewPrescriptionPage {
 	@FindBy(xpath="//a[text()='VIEW/EDIT']")
 	WebElement patientDetailsPage;
 	
-	public WebElement getPrescriptionsLink(){
-	return prescriptionsLink;
+	
+	public void getPrescriptionsLink(){
+	 prescriptionsLink.click();
 }
 
 	public WebElement getpatientDetailsPage(){
 	return patientDetailsPage;
 }
 	
-	public WebElement getviewPrescriptionsLink(){
-	return viewPrescriptionsLink;
+	public void getviewPrescriptionsLink(){
+	 viewPrescriptionsLink.click();
 }
 	public WebElement getviewPrescriptionsuccessful(){
 		return viewPrescriptionsuccessful;
@@ -57,19 +58,19 @@ public class ViewPrescriptionPage {
 	return  patientNameField;
 }
 	
-	public WebElement getpatientNameFieldSugg(){
-	return patientNameFieldSugg;
+	public void getpatientNameFieldSugg(){
+	 patientNameFieldSugg.click();
 }
 	
-	public WebElement getprescriptionDetails(){
-		return prescriptionDetails;
+	public void getprescriptionDetails(){
+		 prescriptionDetails.click();
 	}
 	
-	public WebElement getbackBtn(){
-		return backBtn;
+	public void getbackBtn(){
+		 backBtn.click();
 	}
 	
-	public WebElement getgoToPatientDetails(){
-		return goToPatientDetails;
+	public void getgoToPatientDetails(){
+		 goToPatientDetails.click();
 	}
 }

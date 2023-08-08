@@ -41,24 +41,24 @@ public class ForgotPasswordField {
 		return backLoginPage;
 	}
 
-	public WebElement getForgotPassword() {
-		return forgotpassword;
+	public void getForgotPassword() {
+		 forgotpassword.click();
 	}
 
 	public WebElement getUsernamefield() {
 		return usernamefield;
 	}
 
-	public WebElement getResetButtonClick() {
-		return ResetButtonClick;
+	public void getResetButtonClick() {
+         ResetButtonClick.click();
 	}
 
-	public WebElement getBackLoginPage() {
-		return BackLoginPage;
+	public void getBackLoginPage() {
+		 BackLoginPage.click();;
 	}
 	
-	public WebElement getGotItButton() {
-		return gotItButton;
+	public void getGotItButton() {
+		 gotItButton.click();
 	}
 
 }

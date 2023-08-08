@@ -1,5 +1,10 @@
 package com.medopract.testscript;
 
+import java.io.IOException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.poi.EncryptedDocumentException;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -9,28 +14,28 @@ import com.medopract.pom.ForgotPasswordField;
 
 
 public class ForgetPasswordTest extends BaseClass {
-
+	
+	Logger logger= LogManager.getLogger(ForgetPasswordTest.class);
+	String ForgetPass_Username;
+	String url;
 	@BeforeClass
-	public void OpenApplication() throws InterruptedException {
-		driver=OpenBrowser();
-		driver.manage().window().maximize();  
-		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
+	public void OpenApplication() throws EncryptedDocumentException, IOException  {
+		driver=initializeDriver();
+		url = f.getPropertyData("url");
+		driver.get(url);
 		logger.info("Navigated to Application URL");
-		Thread.sleep(3000);
-		
+		ForgetPass_Username=f.getExcelData("Forget Password", 1, 2);
 	}
 
 	@Test(priority=1)
-	public void forgotpassword() throws InterruptedException {
+	public void forgotpassword()  {
 
 		ForgotPasswordField fpf = new ForgotPasswordField(driver);
-		fpf.getGotItButton().click();
-		fpf.getForgotPassword().click();
-		Thread.sleep(3000);
+		fpf.getGotItButton();
+		fpf.getForgotPassword();
 		logger.info("Clicked On Forgot Password");
-		fpf.getUsernamefield().sendKeys("ashwinkv016");
-		Thread.sleep(3000);
-		//fpf.getResetButtonClick().click();
+		fpf.getUsernamefield().sendKeys(ForgetPass_Username);
+		//fpf.getResetButtonClick();
 		logger.info("Clicked On ResetButton");
 		
 		String actual=null;
@@ -47,10 +52,9 @@ public class ForgetPasswordTest extends BaseClass {
 	}
 
 	@Test(priority=2)
-	public void BackLoginPage() throws InterruptedException {
+	public void BackLoginPage() {
 		ForgotPasswordField fpf = new ForgotPasswordField(driver);
-		fpf.getBackLoginPage().click();
-		Thread.sleep(3000);
+		fpf.getBackLoginPage();
 		logger.info("Clicked On Back Login Page");
 		String actual=null;
 		try {

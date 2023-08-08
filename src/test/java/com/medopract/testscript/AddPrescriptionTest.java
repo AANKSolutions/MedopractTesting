@@ -3,13 +3,13 @@ package com.medopract.testscript;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.medopract.generic.BaseClass;
@@ -17,27 +17,52 @@ import com.medopract.pom.AddPrescriptionPage;
 import com.medopract.pom.LoginPage;
 
 public class AddPrescriptionTest extends BaseClass {
+	Logger logger= LogManager.getLogger(AddPrescriptionTest.class);
+
+	String url;
+	String un;
+	String pw;
+	String AddPrescription_Patientname;
+	String AddPrescription_Email_Id;
+	String AddPrescription_MedicineName1;
+	String AddPrescription_MedicineName2;
+	String AddPrescription_NoOfDays1;
+	String AddPrescription_NoOfDays2;
+	String AddPrescription_Instructions1;
+	String AddPrescription_Instructions2;
+	String AddPrescription_AmountToTake1;
+	String AddPrescription_AmountToTake2;
+
 
 	@BeforeClass
-	public void OpenApplication() throws InterruptedException {
-		driver= OpenBrowser();
-		driver.manage().window().maximize();
-		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
+	public void OpenApplication() throws IOException {
+		driver= initializeDriver();
+		url = f.getPropertyData("url");
+		un = f.getPropertyData("un");
+		pw = f.getPropertyData("pw");
+		AddPrescription_Patientname=f.getExcelData("Add Prescription", 1, 1);
+		AddPrescription_Email_Id=f.getExcelData("Add Prescription", 2, 2);
+		AddPrescription_MedicineName1=f.getExcelData("Add Prescription", 3, 1);
+		AddPrescription_MedicineName2=f.getExcelData("Add Prescription", 4, 1);
+		AddPrescription_NoOfDays1=f.getExcelData("Add Prescription", 5, 1);
+		AddPrescription_NoOfDays2=f.getExcelData("Add Prescription", 6, 1);
+		AddPrescription_Instructions1=f.getExcelData("Add Prescription", 7, 1);
+		AddPrescription_Instructions2=f.getExcelData("Add Prescription", 8, 1);
+		AddPrescription_AmountToTake1=f.getExcelData("Add Prescription", 9, 1);
+		AddPrescription_AmountToTake2=f.getExcelData("Add Prescription", 10, 1);
+		
+		driver.get(url);
 		logger.info("Navigated to Application URL");
-		Thread.sleep(2000);
 
 		LoginPage l=new LoginPage(driver);
-		l.getGotItButton().click();
-		Thread.sleep(2000);
-		l.getUsername().sendKeys("ashwinkv016"); 
+		l.getGotItButton();
+		l.setUsername(un); 
 		logger.info("Entered UserName Field");
-		l.getPassword().sendKeys("ashwinkv016");
+		l.setPassword(pw);
 		logger.info("Entered Password Field");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();
+		l.getSubmitButton();
 		logger.info("Clicked Submit Button");
-		Thread.sleep(2000);
-		
+
 		String actual = null;
 		try {
 			if(l.getaccInfo().isDisplayed())
@@ -48,116 +73,85 @@ public class AddPrescriptionTest extends BaseClass {
 		}
 		Assert.assertEquals(actual, "success");
 	}
-	
+
 	@Test(priority = 1)
-	public void withoutAddingMedicineField() throws InterruptedException {
+	public void withoutAddingMedicineField()  {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		ap.getclickPrescription().click();
-		Thread.sleep(2000);
+		ap.getclickPrescription();
 		logger.info("Clicked on Prescription");
-		ap.getPatientNameField().sendKeys("Ashwin");
+		ap.getPatientNameField().sendKeys(AddPrescription_Patientname);
 		logger.info("Entered Patient Name");
-		Thread.sleep(2000);
-		ap.getpatientNameSuggestion().click();
+		ap.getpatientNameSuggestion();
 		logger.info("Clicked Patient Name Suggestion");
-		Thread.sleep(2000);
-		ap.getEmailField().sendKeys("vashwinkumar008@gmail.com");
+		ap.getEmailField().sendKeys(AddPrescription_Email_Id);
 		logger.info("Entered Email Field");
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,750)");
-		Thread.sleep(2000);
-		ap.getSaveAndPrintButton().click();
+		ap.getSaveAndPrintButton();
 		logger.info("Clicked Save and Print Button");
-		Thread.sleep(2000);
 
 		String expectedResult="Please add medicines";
 		String actualResult=ap.geterrorMessage().getText();
 		Assert.assertEquals(actualResult, expectedResult);
-		
-		ap.getcancelNotification().click();
-		Thread.sleep(2000);
+
+		ap.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 
 	@Test(priority = 2)
-	public void addPrescription() throws InterruptedException {
+	public void addPrescription()  {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		Thread.sleep(3000);
-		ap.getMedicineNameField().sendKeys("Dolo65");
+		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName1);
 		logger.info("Entered Medicine Name");
-		Thread.sleep(2000);
-		ap.getTotalNumberDays().sendKeys("100");
+		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays1);
 		logger.info("Entered Total Number Of Days");
-		Thread.sleep(2000);
-		ap.getTimingsInput().sendKeys("Morning , Evening");
+		ap.getTimingsInput().sendKeys(AddPrescription_Instructions1);
 		logger.info("Entered Time Inputs");
-		Thread.sleep(2000);
-		ap.getAmountInput().sendKeys("1");
+		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake1);
 		logger.info("Entered number Of amount to be used");
-		Thread.sleep(2000);
-		ap.getClickingPlusSign().click();
+		ap.getClickingPlusSign();
 		logger.info("Clicked Medicine Field Plus Sign");
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		ap.getSaveAndPrintButton().click();
+		ap.getSaveAndPrintButton();
 		logger.info("Clicked Save and Print Button");
-		Thread.sleep(2000);
-		ap.getyesButtonField().click();
+		ap.getyesButtonField();
 		logger.info("Clicked yes");
-		Thread.sleep(4000);
 
 		String expectedResult="Prescription created successfully!";
 		String actualResult=ap.getsuccessMessage().getText();
 		Assert.assertEquals(actualResult, expectedResult);
-		
-		ap.getcancelNotification().click();
-		Thread.sleep(2000);
+
+		ap.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 
 
 	@Test(priority= 3)
-	public void printPrescription() throws InterruptedException, AWTException {
+	public void printPrescription() throws AWTException {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		
-		Thread.sleep(4000);
-		ap.getprintPrescription().click();
+		ap.getprintPrescription();
 		logger.info("Clicked PrintPrescription button");
-		Thread.sleep(4000);
 		Robot r=new Robot();
 		r.keyPress(KeyEvent.VK_ESCAPE);
 		logger.info("Return to Home Page");
-		Thread.sleep(2000);
 	}
 
 	@Test(priority=4)
-	public void downloadPrescriptionAgain() throws InterruptedException {
+	public void downloadPrescriptionAgain() {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		
-		Thread.sleep(4000); 
-		ap.getdownloadPrescription().click();
+		ap.getdownloadPrescription();
 		logger.info("Clicking Download Prescription Button");
-		Thread.sleep(4000);
-		ap.getdownloadPrescription().click();
+		ap.getdownloadPrescription();
 		logger.info(" Again Clicking Download Prescription Button");
-		Thread.sleep(4000);
 	}
 
-	
+
 
 	@Test(priority = 5)
-	public void clickingBack() throws InterruptedException {
+	public void clickingBack() {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		Thread.sleep(2000);
-		ap.getbackPrescriptionbtn().click();
+		ap.getbackPrescriptionbtn();
 		logger.info("Clicking Back in Printing Page");
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,250)");
-		Thread.sleep(3000);
-		ap.getBackButton().click();
+		ap.getBackButton();
 		logger.info("Clicking Back in Prescription Page");
-		
+
 		LoginPage l=new LoginPage(driver);
 		String actual = null;
 		try {
@@ -169,101 +163,70 @@ public class AddPrescriptionTest extends BaseClass {
 		}
 		Assert.assertEquals(actual, "success");
 	}
-	
+
 	@Test(priority =6 )
-	public void cancelAddedMedicineField() throws InterruptedException {
+	public void cancelAddedMedicineField()  {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		ap.getclickPrescription().click();
-		Thread.sleep(2000);
+		ap.getclickPrescription();
 		logger.info("Clicked on Prescription");
-		ap.getPatientNameField().sendKeys("Ashwin");
+		ap.getPatientNameField().sendKeys(AddPrescription_Patientname);
 		logger.info("Entered Patient Name");
-		Thread.sleep(2000);
-		ap.getpatientNameSuggestion().click();
+		ap.getpatientNameSuggestion();
 		logger.info("Clicked Patient Name Suggestion");
-		Thread.sleep(2000);
-		ap.getEmailField().sendKeys("vashwinkumar008@gmail.com");
+		ap.getEmailField().sendKeys(AddPrescription_Email_Id);
 		logger.info("Entered Email Field");
-		Thread.sleep(2000);
-		ap.getMedicineNameField().sendKeys("Dolo65");
+		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName1);
 		logger.info("Entered Medicine Name");
-		Thread.sleep(2000);
-		ap.getTotalNumberDays().sendKeys("100");
+		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays1);
 		logger.info("Entered Total Number Of Days");
-		Thread.sleep(2000);
-		ap.getTimingsInput().sendKeys("Morning , Evening");
+		ap.getTimingsInput().sendKeys(AddPrescription_Instructions1);
 		logger.info("Entered Time Inputs");
-		Thread.sleep(2000);
-		ap.getAmountInput().sendKeys("1");
+		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake1);
 		logger.info("Entered number Of amount to be used");
-		Thread.sleep(2000);
-		ap.getClickingPlusSign().click();
+		ap.getClickingPlusSign();
 		logger.info("Clicked Medicine Field Plus Sign");
-		Thread.sleep(3000);
-		ap.getMedicineNameField().sendKeys("Dolo65");
+		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName1);
 		logger.info("Again entering Medicine Name");
-		Thread.sleep(2000);
-		ap.getTotalNumberDays().sendKeys("100");
+		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays1);
 		logger.info("Again entering  Total Number Of Days");
-		Thread.sleep(2000);
-		ap.getTimingsInput().sendKeys("Morning , Evening");
+		ap.getTimingsInput().sendKeys(AddPrescription_Instructions1);
 		logger.info("Again entering  Time Inputs");
-		Thread.sleep(2000);
-		ap.getAmountInput().sendKeys("1");
+		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake1);
 		logger.info("Again entering  number Of amount to be used");
-		Thread.sleep(2000);
-		ap.getClickingPlusSign().click();
+		ap.getClickingPlusSign();
 		logger.info("Again clicking Medicine Field Plus Sign");
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,750)");
-		Thread.sleep(4000);
-		ap.getdeleteMedicineField().click();
+		ap.getdeleteMedicineField();
 		logger.info("Cancelled Medicine field");
-		ap.getdeleteMedicineField().click();
+		ap.getdeleteMedicineField();
 		logger.info("Again Cancelled Medicine field");
-		
+
 	}
-	
+
 	@Test(priority=7)
-	public void withInvaliedMedicineField() throws InterruptedException {
+	public void withInvaliedMedicineField() {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		ap.getMedicineNameField().sendKeys("gg");
+		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName2);
 		logger.info("Entered Medicine Name");
-		Thread.sleep(2000);
-		ap.getTotalNumberDays().sendKeys("gg");
+		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays2);
 		logger.info("Entered Total Number Of Days");
-		Thread.sleep(2000);
-		ap.getTimingsInput().sendKeys("gg");
+		ap.getTimingsInput().sendKeys(AddPrescription_Instructions2);
 		logger.info("Entered Time Inputs");
-		Thread.sleep(2000);
-		ap.getAmountInput().sendKeys("gg");
+		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake2);
 		logger.info("Entered number Of amount to be used");
-		Thread.sleep(2000);
-		ap.getClickingPlusSign().click();
+		ap.getClickingPlusSign();
 		logger.info("Clicked Medicine Field Plus Sign");
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		ap.getSaveAndPrintButton().click();
+		ap.getSaveAndPrintButton();
 		logger.info("Clicked Save and Print Button");
-		Thread.sleep(2000);
-		ap.getyesButtonField().click();
+		ap.getyesButtonField();
 		logger.info("Clicked yes");
-		Thread.sleep(4000);
-		Thread.sleep(3000);
-		
+
 		String expectedResult="could not create record! Prescriptions record could not be added. due to: ValidationError: medecineDetails.0.totalcountsToConsume: Cast to Number failed for value \"gg\" at path \"totalcountsToConsume\", medecineDetails.0.howmanyatatime: Cast to Number failed for value \"gg\" at path \"howmanyatatime\"";
 		String actualResult=ap.getmedicineErrorMsg().getText();
 		Assert.assertEquals(actualResult, expectedResult);
-		
-		ap.getcancelNotification().click();
-		Thread.sleep(2000);
+
+		ap.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
-
-
-
-
 
 	@AfterClass
 	public void logout() {

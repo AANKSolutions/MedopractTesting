@@ -75,8 +75,8 @@ public class RegistrationPage {
 		return TermsErrorNotification;
 	}
 
-	public WebElement getClickRegisterNow() {
-		return ClickRegisterNow;
+	public void getClickRegisterNow() {
+		 ClickRegisterNow.click();
 	}
 
 	public WebElement geterrorNotification() {
@@ -84,8 +84,8 @@ public class RegistrationPage {
 	}
 
 
-	public WebElement getcancelNotification() {
-		return cancelNotification;
+	public void getcancelNotification() {
+		 cancelNotification.click();
 	}
 
 	public WebElement getregistrationSuccessfulMsg() {
@@ -112,26 +112,26 @@ public class RegistrationPage {
 		return confirmUserNameField;
 	}
 
-	public WebElement getagreetermCheckBox() {
-		return agreetermCheckBox;
+	public void getagreetermCheckBox() {
+		 agreetermCheckBox.click();
 	}
 
-	public WebElement getclickRegisterButton(){
-		return clickRegisterButton;
+	public void getclickRegisterButton(){
+		 clickRegisterButton.click();
 	}
 
-	public WebElement getclickImAlreadyUser(){
-		return clickImAlreadyUser;
+	public void getclickImAlreadyUser(){
+		 clickImAlreadyUser.click();
 	}
-	public WebElement getclickHelp(){
-		return clickHelp;
+	public void getclickHelp(){
+		 clickHelp.click();
 	}
 
-	public WebElement getGotItButton() {
-		return gotItButton;
+	public void getGotItButton() {
+		 gotItButton.click();
 	}	
 
-	public WebElement getOkButton() {
-		return okButton;
+	public void getOkButton() {
+		 okButton.click();
 	}
 }

@@ -69,7 +69,7 @@ public class PatientVisitPage {
 	@FindBy(xpath="//input[@name='visitReason']")
 	WebElement visitReason;
 
-	@FindBy(xpath="//a[text( )='Add Appointment']")
+	@FindBy(xpath="//a[text()='Add Appointment']")
 	WebElement addAppointment;
 
 	@FindBy(xpath = "(//input[@class='PatientVisit_followupInput__3tX-8'])[2]")
@@ -105,9 +105,9 @@ public class PatientVisitPage {
 	
 	
 
-	public WebElement getPatientsClick() {
-		return patientsClick;
-	}
+	public void getPatientsClick() {
+		 patientsClick.click();
+		 }
 	
 	public WebElement getfollowNotification() {
 		return followNotification;
@@ -125,32 +125,32 @@ public class PatientVisitPage {
 		return errorMessage;
 	}
 
-	public WebElement getPatientvisitClick() {
-		return patientvisitClick;
+	public void getPatientvisitClick() {
+		 patientvisitClick.click();
 	}
 
 	public WebElement getPatientVisitName() {
 		return patientVisitName;
 	}
 
-	public WebElement getpatientVisitNameSuggestions() {
-		return patientVisitNameSuggestions;
+	public void getpatientVisitNameSuggestions() {
+		 patientVisitNameSuggestions.click();
 	}
 
 	public WebElement getPrimaryComplaint() {
 		return primaryComplaint;
 	}
 
-	public WebElement getClickingSymptomsPlusSign() {
-		return clickingSymptomsPlusSign;
+	public void getClickingSymptomsPlusSign() {
+		 clickingSymptomsPlusSign.click();
 	}
 
 	public WebElement getSymptoms() {
 		return symptoms;
 	}
 
-	public WebElement getsymptomsDelete() {
-		return  symptomsDelete;
+	public void getsymptomsDelete() {
+		  symptomsDelete.click();
 	}
 
 	public WebElement getbloodPressure() {
@@ -169,12 +169,12 @@ public class PatientVisitPage {
 		return InvestigationTests;
 	}
 
-	public WebElement getClickingInvestigationPlusSign() {
-		return clickingInvestigationPlusSign;
+	public void getClickingInvestigationPlusSign() {
+		 clickingInvestigationPlusSign.click();
 	}
 
-	public WebElement getinvestigationDelete() {
-		return investigationDelete;
+	public void getinvestigationDelete() {
+		 investigationDelete.click();
 	}
 	public WebElement getclinicalObservation(){
 		return clinicalObservation;
@@ -184,16 +184,16 @@ public class PatientVisitPage {
 		return diagnosisRemark;
 	}
 
-	public WebElement getSaveButton() {
-		return saveButton;
+	public void getSaveButton() {
+		 saveButton.click();
 	}
 
-	public WebElement getFollowup() {
-		return followup;
+	public void getFollowup() {
+		 followup.click();
 	}
 
-	public WebElement getAddAppointment() {
-		return addAppointment;
+	public void getAddAppointment() {
+		 addAppointment.click();
 	}
 
 	public WebElement getVisitReason() {
@@ -204,27 +204,27 @@ public class PatientVisitPage {
 		return dateAndTimeFollowUp;
 	}
 
-	public WebElement getaddNewPatientHyperLink() {
-		return addNewPatientHyperLink;
+	public void getaddNewPatientHyperLink() {
+		 addNewPatientHyperLink.click();
 	}
 
 	public WebElement getresultAndDocument() {
 		return resultAndDocument;
 	}
 	
-	public WebElement getdatePickFollowUp() {
-		return datePickFollowUp;
+	public void getdatePickFollowUp() {
+		 datePickFollowUp.click();
 	}
 	
-	public WebElement gettimePickFollowUp() {
-		return timePickFollowUp;
+	public void gettimePickFollowUp() {
+		 timePickFollowUp.click();
 	}
 	
-	public WebElement getcancelBtn() {
-		return cancelBtn;
+	public void getcancelBtn() {
+		 cancelBtn.click();
 	}
 	
-	public WebElement getcancelNotification() {
-		return cancelNotification;
+	public void getcancelNotification() {
+		 cancelNotification.click();
 	}
 }

@@ -1,34 +1,30 @@
 package com.medopract.generic;
 
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
-/**public class FileLib {
-	//WebDriver driver;
-	Properties p;
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-	public  FileLib() {
-		File src = new File("./data/medopract.property");
-		try{
-			FileInputStream fis=new FileInputStream(src);
-			p=new Properties();
-			p.load(fis);
+public class FileLib {
+	Properties p;
+	public String getPropertyData(String key) throws IOException {
+		
+		FileInputStream fisconfig=new FileInputStream("./data/medopract.property");
+		p=new Properties();
+		p.load(fisconfig);
+		String data = p.getProperty(key);
+		return data;
 		}
-		catch(Exception e) {
-			System.out.println("Exception is "+e.getMessage());
-		}
+	
+	public String getExcelData(String sheetName,int rowNum,int cell) throws EncryptedDocumentException,IOException {
+		
+		FileInputStream fisexcel=new FileInputStream("./data/medopract.xlsx");
+		Workbook wb = WorkbookFactory.create(fisexcel);
+		String data = wb.getSheet(sheetName).getRow(rowNum).getCell(cell).getStringCellValue();
+		return data;
 	}
-	public String getApplicationURL() {
-		String url = p.getProperty("BaseURL");
-		return url;
-	}
-	public String getUsername() {
-		String un = p.getProperty("Username");
-	    return un;	
-	}
-	public String getPassword() {
-		String pw = p.getProperty("Password");
-		return pw;
-	}
-}**/
+
+}

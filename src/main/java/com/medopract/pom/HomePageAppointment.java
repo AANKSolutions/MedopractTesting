@@ -54,8 +54,8 @@ public class HomePageAppointment {
 	WebElement Notification;
 
 	
-	public WebElement getClickingSigns() {
-		return ClickingSigns;
+	public void getClickingSigns() {
+		 ClickingSigns.click();
 	}
 	
 	public WebElement geterrorMsg() {
@@ -82,24 +82,24 @@ public class HomePageAppointment {
 		return MobileField;
 	}
 
-	public WebElement getAddAppointmentButton() {
-		return AddAppointmentButton;
+	public void getAddAppointmentButton() {
+		 AddAppointmentButton.click();
 	}
 
-	public WebElement getCancelExistingAppointment() {
-		return CancelExistingAppointment;
+	public void getCancelExistingAppointment() {
+		 CancelExistingAppointment.click();
 	}
 
-	public WebElement getEditExistingAppointment() {
-		return EditExistingAppointment;
+	public void getEditExistingAppointment() {
+		 EditExistingAppointment.click();
 	}
 
-	public WebElement getUpdateButton() {
-		return UpdateButton;
+	public void getUpdateButton() {
+		 UpdateButton.click();
 	}
 
-	public WebElement getSMSReminder() {
-		return SMSReminder;
+	public void getSMSReminder() {
+		 SMSReminder.click();
 	}
 	
 	public WebElement getNotification() {
@@ -107,8 +107,8 @@ public class HomePageAppointment {
 	}
 
 
-	public WebElement getcancelNotification() {
-		return cancelNotification;
+	public void getcancelNotification() {
+		 cancelNotification.click();
 	}
 
 	

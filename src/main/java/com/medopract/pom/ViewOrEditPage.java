@@ -11,7 +11,7 @@ public class ViewOrEditPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath="//a[text( )='VIEW/EDIT']")
+	@FindBy(xpath="//a[text()='VIEW/EDIT']")
 	WebElement viewOrEdit;
 
 	@FindBy(xpath="//input[@name='patientname']")
@@ -49,8 +49,8 @@ public class ViewOrEditPage {
 	
 	
 
-	public WebElement getViewOrEdit() {
-		return viewOrEdit;
+	public void getViewOrEdit() {
+		 viewOrEdit.click();
 	}
 	
 	public WebElement getViewOrEditPage() {
@@ -77,22 +77,22 @@ public class ViewOrEditPage {
 		return phoneNumberField;
 	}
 
-	public WebElement getPatientListClick() {
-		return patientListClick;
+	public void getPatientListClick() {
+		 patientListClick.click();
 	}
 
-	public WebElement getUpdateButtonClick() {
-		return updateButtonClick;
+	public void getUpdateButtonClick() {
+		 updateButtonClick.click();
 	}
 
-	public WebElement getCancelButtonClick() {
-		return cancelButtonClick;
+	public void getCancelButtonClick() {
+		 cancelButtonClick.click();
 	}
-    public WebElement getDeleteButtonClick() {
-	   return deleteButtonClick;
+    public void getDeleteButtonClick() {
+	    deleteButtonClick.click();
     }
-    public WebElement getcancelNotification() {
-		return cancelNotification;
+    public void getcancelNotification() {
+		 cancelNotification.click();
 	}
 
 

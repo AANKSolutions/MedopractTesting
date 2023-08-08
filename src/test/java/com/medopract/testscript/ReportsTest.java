@@ -1,11 +1,12 @@
 package com.medopract.testscript;
 
+import java.io.IOException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.medopract.generic.BaseClass;
@@ -14,25 +15,54 @@ import com.medopract.pom.LoginPage;
 import com.medopract.pom.ReportsPage;
 
 public class ReportsTest extends BaseClass{
-
+	Logger logger= LogManager.getLogger(ReportsTest.class);
+	String url;
+	String un;
+	String pw;
+	
+	String AddPatient_Name1;
+	String AddPatient_Phno1;
+	String AddPatient_Month;
+	String AddPatient_Day;
+	String AddPatient_Year;
+	String AddPatient_Occupation;
+	String AddPatient_Address;
+	String AddPatient_EmergencyPhno1;
+	String AddPatient_EmergencyPhno2;
+	String AddPatient_Allergy;
+	String AddPatient_Remark;
+	String AddPatient_History;
+	String AddPatient_Habit1;
 	@BeforeClass
-	public void OpenApplication() throws InterruptedException {
-		driver=OpenBrowser();
-		driver.manage().window().maximize();  
-		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
-		logger.info("Navigated to Application URL"); 
+	public void OpenApplication() throws  IOException {
+		driver= initializeDriver();
+		 url = f.getPropertyData("url");
+		 un = f.getPropertyData("un");
+		 pw = f.getPropertyData("pw");
+		 AddPatient_Name1=f.getExcelData("Add Patient", 1, 1);
+		 AddPatient_Phno1=f.getExcelData("Add Patient", 3, 1);
+		 AddPatient_Month=f.getExcelData("Add Patient", 5, 1);
+		 AddPatient_Day=f.getExcelData("Add Patient", 6, 1);
+		 AddPatient_Year=f.getExcelData("Add Patient", 7, 1);
+		 AddPatient_Occupation=f.getExcelData("Add Patient", 8, 1);
+		 AddPatient_Address=f.getExcelData("Add Patient", 9, 1);
+		 AddPatient_EmergencyPhno1=f.getExcelData("Add Patient", 10, 1);
+		 AddPatient_EmergencyPhno2=f.getExcelData("Add Patient", 11, 1);
+		 AddPatient_Allergy=f.getExcelData("Add Patient", 12, 1);
+		 AddPatient_Remark=f.getExcelData("Add Patient", 13, 1);
+		 AddPatient_History=f.getExcelData("Add Patient", 14, 1);
+		 AddPatient_Habit1=f.getExcelData("Add Patient", 15, 1);
+		driver.get(url);
+		logger.info("Navigated to Application URL");
 
 		LoginPage l=new LoginPage(driver);
-		l.getGotItButton().click();
-		Thread.sleep(2000);
-		l.getUsername().sendKeys("ashwinkv016"); 
+		l.getGotItButton();
+		l.setUsername(un); 
 		logger.info("Entered UserName Field");
-		l.getPassword().sendKeys("ashwinkv016");
+		l.setPassword(pw);
 		logger.info("Entered Password Field");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();
+		l.getSubmitButton();
 		logger.info("Clicked Submit Button");
-		Thread.sleep(2000);   
 
 		String actual = null;
 		try {
@@ -46,120 +76,82 @@ public class ReportsTest extends BaseClass{
 	}
 
 	@Test(priority = 1)
-	public void PatientsTab() throws Exception {
+	public void PatientsTab()  {
 		ReportsPage rp = new ReportsPage(driver);
-		rp.getClickReports().click();
-		Thread.sleep(3000);
+		rp.getClickReports();
 		logger.info("Clicked on Reports");
-		rp.getPatientsTab().click();
+		rp.getPatientsTab();
 		logger.info("Clicked On Patients Tab");
-		Thread.sleep(1000);
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,250)");
-		Thread.sleep(3000);
-		rp.getYearlyTab().click();
+		rp.getYearlyTab();
 		logger.info("Clicked on Yearly Tab");
-		Thread.sleep(3000);
-		rp.getDailyTab().click();
+		rp.getDailyTab();
 		logger.info("Clicked on Daily Tab");
-		Thread.sleep(3000);
-		rp.getMonthlyTab().click();
+		rp.getMonthlyTab();
 		logger.info("Clicked on Monthly Tab");
-		Thread.sleep(3000);
-		rp.getWeeklyTab().click();
+		rp.getWeeklyTab();
 		logger.info("Clicked on Weekly Tab");
-		Thread.sleep(3000);
-		rp.getDailyTab().click();
+		rp.getDailyTab();
 		logger.info("Clicked on Daily Tab");
-		Thread.sleep(3000);
-		rp.getMonthlyTab().click();
+		rp.getMonthlyTab();
 		logger.info("Clicked on Monthly Tab");
-		Thread.sleep(3000);
-		rp.getWeeklyTab().click();
+		rp.getWeeklyTab();
 		logger.info("Clicked on Weekly Tab");
-		Thread.sleep(3000);
-		rp.getWeeklyTab().click();
+		rp.getWeeklyTab();
 		logger.info("Clicked on Weekly Tab");
-		Thread.sleep(3000);
-		rp.getMonthlyTab().click();
+		rp.getMonthlyTab();
 		logger.info("Clicked on Monthly Tab");
-		Thread.sleep(3000);
 	}
 
 
 
 	@Test(priority = 2)
-	public void addPatient() throws InterruptedException {
+	public void addPatient()  {
 		ReportsPage rp = new ReportsPage(driver);
-		rp.getClickAddPatient().click();
-		Thread.sleep(3000);
+		rp.getClickAddPatient();
 		AddPatientPage app=new AddPatientPage(driver);
-		app.getPatientNameField().sendKeys("Ashwin");
-		Thread.sleep(2000);
+		app.getPatientNameField().sendKeys(AddPatient_Name1);
 		logger.info("Added Patient's Name");
-		app.getPhoneNoField().sendKeys("9597277526");
-		Thread.sleep(2000);
+		app.getPhoneNoField().sendKeys(AddPatient_Phno1);
 		logger.info("Added Patient's Phone Number");
-		app.getgenderField().click();
-		Thread.sleep(2000);
+		app.getgenderField();
 		logger.info("Selected Gender Field");
-		Thread.sleep(2000);
-		app.getbirthDateField().click();
-		Thread.sleep(2000);
-		app.getmonthField().sendKeys("10");
-		Thread.sleep(1000);
-		app.getDayField().sendKeys("12");
-		Thread.sleep(1000);
-		app.getYearField().sendKeys("2000");
-		Thread.sleep(1000);
+		app.getbirthDateField();
+		app.getmonthField().sendKeys(AddPatient_Month);
+		app.getDayField().sendKeys(AddPatient_Day);
+		app.getYearField().sendKeys(AddPatient_Year);
 		logger.info("Entered BirthDate Field");
-		app.getBloodGroupField().click();
-		Thread.sleep(2000);
+		app.getBloodGroupField();
 		logger.info("Selected Blood Group");
-		app.getOccupationField().sendKeys("Engineer");
-		Thread.sleep(2000);
+		app.getOccupationField().sendKeys(AddPatient_Occupation);
 		logger.info("Added Occupation Field");
-		app.getAddressField().sendKeys("BTM 2nd Stage");
-		Thread.sleep(2000);
+		app.getAddressField().sendKeys(AddPatient_Address);
 		logger.info("Added Address");
-		app.getEmergencyField().sendKeys("9597277526");
-		Thread.sleep(2000);
+		app.getEmergencyField().sendKeys(AddPatient_EmergencyPhno1);
 		logger.info("Added Emergency contact no field");
-		app.getAllergiesField().sendKeys("Itching");
-		Thread.sleep(2000);
+		app.getAllergiesField().sendKeys(AddPatient_Allergy);
 		logger.info("Added Allergy field");
-		app.getRemarksField().sendKeys("Normal");
-		Thread.sleep(2000);
+		app.getRemarksField().sendKeys(AddPatient_Remark);
 		logger.info("Added Remark field");
-		app.getHistoryField().sendKeys("Nill");
-		Thread.sleep(2000);
+		app.getHistoryField().sendKeys(AddPatient_History);
 		logger.info("Added History field");
-		app.getHabitsField().sendKeys("Eating Sweets");
-		Thread.sleep(2000);
+		app.getHabitsField().sendKeys(AddPatient_Habit1);
 		logger.info("Entered Habit field");
-		app.getClickingPlusSign().click();
-		Thread.sleep(5000);
+		app.getClickingPlusSign();
 		logger.info("Added Habit field by clicking Plus");
-		app.getSaveButton().submit();
-		Thread.sleep(2000);
+		app.getSaveButton();
 		
 		String expectedResult="Patient Record created successfully!";
 		String actualResult=app.getCreatedSuccessfully().getText();
 		Assert.assertEquals(actualResult, expectedResult);
 		
-		app.getcancelNotification().click();
-		Thread.sleep(2000);
+		app.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 	
 	@Test(priority=3)
-	public void dateView() throws InterruptedException {
+	public void dateView(){
 		ReportsPage rp=new ReportsPage(driver);
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(780, -193)");
-		Thread.sleep(3000);
-		rp.getClickReports().click();
-		Thread.sleep(3000);
+		rp.getClickReports();
 		logger.info("Clicked on Reports");
 		
 		String TodayDate=rp.gettodayDateView().getText();
@@ -169,12 +161,11 @@ public class ReportsTest extends BaseClass{
 	}
 	
 	@Test(priority = 4)
-	public void cancel() throws InterruptedException {
+	public void cancel()  {
 		ReportsPage rp = new ReportsPage(driver);
 		LoginPage l=new LoginPage(driver);
-		rp.getCancelButton().click();
+		rp.getCancelButton();
 		logger.info("Clicked on Cancel Button");
-		Thread.sleep(3000);
 		
 		String actual = null;
 		try {

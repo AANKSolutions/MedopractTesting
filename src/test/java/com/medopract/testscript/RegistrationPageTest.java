@@ -3,7 +3,11 @@ package com.medopract.testscript;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import org.openqa.selenium.JavascriptExecutor;
+import java.io.IOException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.poi.EncryptedDocumentException;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,77 +18,71 @@ import com.medopract.pom.RegistrationPage;
 
 public class RegistrationPageTest extends BaseClass {
 
-
+	Logger logger= LogManager.getLogger(RegistrationPageTest.class);
+	String url;
+	String Registration_FullName;
+	String Registration_Email;
+	String Registration_Phno;
+	String Registration_UserName;
+	String Registration_CnfrmUserName;
+	String Registration_INCnfrmUserName;
+	
+	
 	@BeforeClass
-	public void OpenApplication() throws InterruptedException {
-		driver=OpenBrowser();
-		driver.manage().window().maximize();  
-		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
+	public void OpenApplication() throws EncryptedDocumentException, IOException  {
+		driver=initializeDriver();
+		 url = f.getPropertyData("url");
+		Registration_FullName=f.getExcelData("Registration Page", 1, 1);
+		Registration_Email=f.getExcelData("Registration Page", 2, 1);
+		Registration_Phno=f.getExcelData("Registration Page", 3, 1);
+		Registration_UserName=f.getExcelData("Registration Page", 4, 1);
+		Registration_CnfrmUserName=f.getExcelData("Registration Page", 5, 1);
+		Registration_INCnfrmUserName=f.getExcelData("Registration Page", 6, 1);
+		
+		driver.get(url);
 		logger.info("Navigated to Application URL");
 	}
 
 	@Test(priority = 1)
-	public void withoutMandatoryAllField() throws InterruptedException {
+	public void withoutMandatoryAllField()  {
 		RegistrationPage rp=new RegistrationPage(driver);
-		rp.getGotItButton().click();
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		rp.getClickRegisterNow().click();
-		Thread.sleep(2000);
+		rp.getGotItButton();
+		rp.getClickRegisterNow();
 		logger.info("Clicked RegisterNow Button");
-		rp.nameField.sendKeys("");
+		rp.nameField.clear();
 		logger.info("Entered Name");
-		Thread.sleep(1000);
-		rp.getemailField().sendKeys("");
+		rp.getemailField().clear();
 		logger.info("Entered Email Address");
-		Thread.sleep(1000);
-		rp.getmobileField().sendKeys("");
+		rp.getmobileField().clear();
 		logger.info("Entered Phone Number");
-		Thread.sleep(1000);
-		rp.getuserNameField().sendKeys("");
+		rp.getuserNameField().clear();
 		logger.info("Entered UserName");
-		Thread.sleep(1000);
-		rp.getconfirmUserNameField().sendKeys("");
+		rp.getconfirmUserNameField().clear();
 		logger.info("Entered ConfirmUserName");
-		Thread.sleep(1000);
 		rp.getagreetermCheckBox();
 		logger.info("Clicked Checkbox");
 	
-		j.executeScript("window.scrollBy(0,750)");
-		Thread.sleep(2000);
-		rp.getclickRegisterButton().click();
+		rp.getclickRegisterButton();
 		logger.info("Clicked On Register Button");
-		Thread.sleep(5000);
 	}
 
 	@Test(priority = 2)
-	public void Registration() throws InterruptedException {
+	public void Registration()  {
 		RegistrationPage rp=new RegistrationPage(driver);
-		rp.nameField.sendKeys("Akdevil");
+		rp.nameField.sendKeys(Registration_FullName);
 		logger.info("Entered Name");
-		Thread.sleep(1000);
-		rp.getemailField().sendKeys("ak1234@gmail.com");
+		rp.getemailField().sendKeys(Registration_Email);
 		logger.info("Entered Email Address");
-		Thread.sleep(1000);
-		rp.getmobileField().sendKeys("9486779737");
+		rp.getmobileField().sendKeys(Registration_Phno);
 		logger.info("Entered Phone Number");
-		Thread.sleep(1000);
-		rp.getuserNameField().sendKeys("Ak1234@1123");
+		rp.getuserNameField().sendKeys(Registration_UserName);
 		logger.info("Entered UserName");
-		Thread.sleep(1000);
-		rp.getconfirmUserNameField().sendKeys("Ak1234@1123");
+		rp.getconfirmUserNameField().sendKeys(Registration_CnfrmUserName);
 		logger.info("Entered ConfirmUserName");
-		Thread.sleep(1000);
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,750)");
-		Thread.sleep(2000);
-		rp.getagreetermCheckBox().click();
+		rp.getagreetermCheckBox();
 		logger.info("Clicked Checkbox");
-		Thread.sleep(2000);
-		rp.getclickRegisterButton().click();
+		rp.getclickRegisterButton();
 		logger.info("Clicked On Register Button");
-		Thread.sleep(3000);	
 
 	/**	String actual = null;
 		try {
@@ -102,53 +100,43 @@ public class RegistrationPageTest extends BaseClass {
 	}
 
 	@Test(priority = 3)
-	public void registerWithExistingDataAgain() throws InterruptedException {
+	public void registerWithExistingDataAgain()  {
 		RegistrationPage rp=new RegistrationPage(driver);
-		rp.getclickRegisterButton().click();
+		rp.getclickRegisterButton();
 		logger.info("Clicked On Register Button");
-		Thread.sleep(2000);	
 
 		String actual="Doctor Already Registered";
 		String expected=rp.geterrorNotification().getText();
 		Assert.assertEquals(actual, expected);
 
-		rp.getcancelNotification().click();
-		Thread.sleep(2000);
+		rp.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 
 	@Test(priority = 4)
-	public void withoutConfirmUsernameField() throws InterruptedException {
+	public void withoutConfirmUsernameField()  {
 		RegistrationPage rp=new RegistrationPage(driver);
 		rp.getconfirmUserNameField().clear();
-		rp.getconfirmUserNameField().sendKeys("");
 		logger.info("Entered ConfirmUserName");
-		Thread.sleep(2000);
-		rp.getclickRegisterButton().click();
+		rp.getclickRegisterButton();
 		logger.info("Clicked On Register Button");
-		Thread.sleep(2000);
 
 
 		String actual="Username and ConfirmUserName does not match!";
 		String expected=rp.geterrorNotification().getText();
 		Assert.assertEquals(actual, expected);
 
-		rp.getcancelNotification().click();
-		Thread.sleep(2000);
+		rp.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 
 	@Test(priority =5)
-	public void invalidConfirmUsernameField() throws InterruptedException {
+	public void invalidConfirmUsernameField()  {
 		RegistrationPage rp=new RegistrationPage(driver);
-		//JavascriptExecutor j=(JavascriptExecutor)driver;
-		rp.getconfirmUserNameField().sendKeys("Ak1234");
+		rp.getconfirmUserNameField().sendKeys(Registration_INCnfrmUserName);
 		logger.info("Entered ConfirmUserName");
-		Thread.sleep(2000);
-		//j.executeScript("window.scrollBy(0,500)");
-		rp.getclickRegisterButton().click();
+		rp.getclickRegisterButton();
 		logger.info("Clicked On Register Button");
-		Thread.sleep(2000);
 		
 		String actual = null;
 		try {
@@ -163,19 +151,14 @@ public class RegistrationPageTest extends BaseClass {
 	}
 
 	@Test(priority = 6)
-	public void withoutAgreeTermCheckBox() throws InterruptedException {
+	public void withoutAgreeTermCheckBox()  {
 		RegistrationPage rp=new RegistrationPage(driver);
-		JavascriptExecutor j=(JavascriptExecutor)driver;
 		rp.getconfirmUserNameField().clear();
-		rp.getconfirmUserNameField().sendKeys("Ak1234@1123");
-		Thread.sleep(4000);
-		rp.getagreetermCheckBox().click();
+		rp.getconfirmUserNameField().sendKeys(Registration_CnfrmUserName);
+		rp.getagreetermCheckBox();
 		logger.info("Clicked Checkbox");
-		Thread.sleep(2000);
-		j.executeScript("window.scrollBy(0,500)");
-		rp.getclickRegisterButton().click();
+		rp.getclickRegisterButton();
 		logger.info("Clicked On Register Button");
-		Thread.sleep(20000);
 		
 		String actual = null;
 		try {
@@ -189,30 +172,21 @@ public class RegistrationPageTest extends BaseClass {
 	}
 	
 	@Test(priority = 7)
-	public void withClickHelp() throws InterruptedException, AWTException {
+	public void withClickHelp() throws  AWTException {
 		RegistrationPage rp=new RegistrationPage(driver);
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(1203, -83)");
-		Thread.sleep(2000);
-		rp.getclickHelp().click();
+		rp.getclickHelp();
 		logger.info("Clicked Help Button");
-		Thread.sleep(3000);
 		Robot r=new Robot();
 		r.keyPress(KeyEvent.VK_ESCAPE);
-		Thread.sleep(3000);
 	}
 	
 
 	@Test(priority = 8)
-	public void alreadyAnUser() throws InterruptedException {
+	public void alreadyAnUser(){
 		RegistrationPage rp=new RegistrationPage(driver);
-		JavascriptExecutor j=(JavascriptExecutor)driver;
-		j.executeScript("window.scrollBy(0,750)");
-		Thread.sleep(3000);
 		logger.info("Clicked RegisterNow Button");
-		rp.getclickImAlreadyUser().submit();
+		rp.getclickImAlreadyUser();
 		logger.info("Clicked I'm already an User Button");
-		Thread.sleep(4000);
 	}
 	
 	

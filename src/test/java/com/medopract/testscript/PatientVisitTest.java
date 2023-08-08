@@ -1,34 +1,69 @@
 package com.medopract.testscript;
 
-import org.openqa.selenium.JavascriptExecutor;
+import java.io.IOException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.medopract.generic.BaseClass;
+import com.medopract.generic.FileLib;
 import com.medopract.pom.LoginPage;
 import com.medopract.pom.PatientVisitPage;
 
 
 public class PatientVisitTest extends BaseClass {
+	Logger logger= LogManager.getLogger(PatientVisitTest.class);
+	String url;
+	String un;
+	String pw;
+	String PatientVisit_Name;
+	String PatientVisit_PrimaryComplaint;
+	String PatientVisit_Symptoms1;
+	String PatientVisit_Symptoms2;
+	String PatientVisit_BloodPressure;
+	String PatientVisit_SugarLevel;
+	String PatientVisit_HeartRate;
+	String PatientVisit_investigations1;
+	String PatientVisit_investigations2;
+	String PatientVisit_Observation;
+	String PatientVisit_Remark;
+	String PatientVisit_Reason;
+	
 	@BeforeClass
-	public void OpenApplication() throws InterruptedException {
-		driver=OpenBrowser();
-		driver.manage().window().maximize();  
-		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
+	public void OpenApplication() throws  IOException {
+		driver= initializeDriver();
+		FileLib f=new FileLib();
+		 url = f.getPropertyData("url");
+		 un = f.getPropertyData("un");
+		 pw = f.getPropertyData("pw");
+		 PatientVisit_Name=f.getExcelData("Patient Visit", 1, 1);
+		 PatientVisit_PrimaryComplaint=f.getExcelData("Patient Visit", 2, 1);
+		 PatientVisit_Symptoms1=f.getExcelData("Patient Visit", 3, 1);
+		 PatientVisit_Symptoms2=f.getExcelData("Patient Visit", 4, 1);
+		 PatientVisit_BloodPressure=f.getExcelData("Patient Visit", 5, 1);
+		 PatientVisit_SugarLevel=f.getExcelData("Patient Visit", 6, 1);
+		 PatientVisit_HeartRate=f.getExcelData("Patient Visit", 7, 1);
+		 PatientVisit_investigations1=f.getExcelData("Patient Visit", 8, 1);
+		 PatientVisit_investigations2=f.getExcelData("Patient Visit", 9, 1);
+		 PatientVisit_Observation=f.getExcelData("Patient Visit", 10, 1);
+		 PatientVisit_Remark=f.getExcelData("Patient Visit", 11, 1);
+		 PatientVisit_Reason=f.getExcelData("Patient Visit", 12, 1);
+		 
+		driver.get(url);
 		logger.info("Navigated to Application URL");
+
 		LoginPage l=new LoginPage(driver);
-		l.getGotItButton().click();
-		Thread.sleep(2000);
-		l.getUsername().sendKeys("ashwinkv016"); 
+		l.getGotItButton();
+		l.setUsername(un); 
 		logger.info("Entered UserName Field");
-		l.getPassword().sendKeys("ashwinkv016");
+		l.setPassword(pw);
 		logger.info("Entered Password Field");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();
+		l.getSubmitButton();
 		logger.info("Clicked Submit Button");
-		Thread.sleep(2000);  
 		
 		String actual = null;
 		try {
@@ -42,16 +77,13 @@ public class PatientVisitTest extends BaseClass {
 	}
 	
 	@Test(priority = 1)
-	public void addNewPatientData() throws InterruptedException {
+	public void addNewPatientData()  {
 		PatientVisitPage pvp=new PatientVisitPage(driver);
-		pvp.getPatientsClick().click();
-		Thread.sleep(3000);
+		pvp.getPatientsClick();
 		logger.info("Clicked Patients Field");
-		pvp.getPatientvisitClick().click();
-		Thread.sleep(2000);
+		pvp.getPatientvisitClick();
 		logger.info("Clicked Patient Visit");
-		pvp.getaddNewPatientHyperLink().click();
-		Thread.sleep(2000);
+		pvp.getaddNewPatientHyperLink();
 		logger.info("Clicked Add New Patient HyperLink");
 		
 		String actual=null;
@@ -68,187 +100,132 @@ public class PatientVisitTest extends BaseClass {
 	}
 
 	@Test(priority=2)
-	public void patientVisitWithoutPrimaryComplaint() throws InterruptedException {
+	public void patientVisitWithoutPrimaryComplaint()  {
 		PatientVisitPage pvp=new PatientVisitPage(driver);
-		pvp.getPatientsClick().click();
-		Thread.sleep(3000);
+		pvp.getPatientsClick();
 		logger.info("Clicked Patients Field");
-		pvp.getPatientvisitClick().click();
-		Thread.sleep(2000);
+		pvp.getPatientvisitClick();
 		logger.info("Clicked Patient Visit");
-		pvp.getPatientVisitName().sendKeys("Ashwin");
-		Thread.sleep(2000);
+		pvp.getPatientVisitName().sendKeys(PatientVisit_Name);
 		logger.info("Clicked Patient Name Field");
-		pvp.getpatientVisitNameSuggestions().click();
-		Thread.sleep(1000);
+		pvp.getpatientVisitNameSuggestions();
 		logger.info("Clicked Patient Nmae Suggestion");
-		pvp.getSymptoms().sendKeys("vomiting");
-		Thread.sleep(3000);
+		pvp.getSymptoms().sendKeys(PatientVisit_Symptoms1);
 		logger.info("Entered symptoms field");
-		pvp.getClickingSymptomsPlusSign().click();
-		Thread.sleep(1000);
+		pvp.getClickingSymptomsPlusSign();
 		logger.info("ClickedSymptoms Plus Sign");
-		pvp.getbloodPressure().sendKeys("80");
-		Thread.sleep(1000);
+		pvp.getbloodPressure().sendKeys(PatientVisit_BloodPressure);
 		logger.info("Entered Blood Pressure Level");
-		pvp.getsugarLevel().sendKeys("100");
-		Thread.sleep(1000);
+		pvp.getsugarLevel().sendKeys(PatientVisit_SugarLevel);
 		logger.info("Entered SugarLevel");
-		pvp.getheartRate().sendKeys("70");
-		Thread.sleep(1000);
+		pvp.getheartRate().sendKeys(PatientVisit_HeartRate);
 		logger.info("Entered Heart Rate Level");
-		pvp.getInvestigationTests().sendKeys("EcG test");
-		Thread.sleep(1000);
+		pvp.getInvestigationTests().sendKeys(PatientVisit_investigations1);
 		logger.info("Entered Investigation Test");
-		pvp.getClickingInvestigationPlusSign().click();
-		Thread.sleep(1000);
+		pvp.getClickingInvestigationPlusSign();
 		logger.info("Clicked Investigation Plus Sign");
-		pvp.getclinicalObservation().sendKeys("Illness in fear");
-		Thread.sleep(1000);
+		pvp.getclinicalObservation().sendKeys(PatientVisit_Observation);
 		logger.info("Entered Clinical Observation");
-		pvp.getdiagnosisRemark().sendKeys("normal");
+		pvp.getdiagnosisRemark().sendKeys(PatientVisit_Remark);
 		logger.info("Entered Diagnosis Remark");
-		JavascriptExecutor j=(JavascriptExecutor) driver;
-		j.executeScript("window.scrollBy(0,500)");
-		Thread.sleep(1000);
-		pvp.getSaveButton().click();
+		pvp.getSaveButton();
 		logger.info("Clicked Save Button");
-		Thread.sleep(3000);
 		
 		String actualResult = pvp.geterrorMessage().getText();
 		String expectedResult = "Please add Primary complaint";
 		Assert.assertEquals(actualResult, expectedResult);
 		
-		pvp.getcancelNotification().click();
-		Thread.sleep(2000);
+		pvp.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 	
 	@Test(priority=3)
-	public void patientVisitWithPrimaryComplaint() throws InterruptedException {
+	public void patientVisitWithPrimaryComplaint()  {
 		PatientVisitPage pvp=new PatientVisitPage(driver);
 		
-		JavascriptExecutor j=(JavascriptExecutor) driver;
-		j.executeScript("window.scrollBy(0,-250)");
-		Thread.sleep(3000);
-		pvp.getPrimaryComplaint().sendKeys("Fever");
+		pvp.getPrimaryComplaint().sendKeys(PatientVisit_PrimaryComplaint);
 		logger.info("Entered primary complaint field");
-		j.executeScript("window.scrollBy(0,250)");
-		Thread.sleep(3000);
-		pvp.getSaveButton().click();
+		pvp.getSaveButton();
 		logger.info("Clicked Save Button");
-		Thread.sleep(3000);
 		
 		String actualResult = pvp.getsuccessMessage().getText();
 		String expectedResult = "Patient visit added successfully!";
 		Assert.assertEquals(actualResult, expectedResult);
 		
-		pvp.getcancelNotification().click();
-		Thread.sleep(2000);
+		pvp.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 	
 
 	
 	@Test(priority=4)
-	public void cancelSymptoms() throws InterruptedException {
+	public void cancelSymptoms()  {
 		PatientVisitPage pvp=new PatientVisitPage(driver);
 		
-		JavascriptExecutor j=(JavascriptExecutor) driver;
-		j.executeScript("window.scrollBy(0,-250)");
-		Thread.sleep(3000);
-		pvp.getsymptomsDelete().click();
-		Thread.sleep(2000);
+		pvp.getsymptomsDelete();
 		logger.info("Clicked Symptoms cancel");
-		pvp.getSymptoms().sendKeys("stomach pain");
-		Thread.sleep(1000);
+		pvp.getSymptoms().sendKeys(PatientVisit_Symptoms2);
 		logger.info("Entered Symptoms");
-		pvp.getClickingSymptomsPlusSign().click();
-		Thread.sleep(5000);
+		pvp.getClickingSymptomsPlusSign();
 		logger.info("Clicked Symptoms Plus");
-		pvp.getSymptoms().sendKeys("Headache");
-		Thread.sleep(1000);
+		pvp.getSymptoms().sendKeys(" ");
 		logger.info("Entered Symptoms Again");
-		pvp.getClickingSymptomsPlusSign().click();
-		Thread.sleep(5000);
+		pvp.getClickingSymptomsPlusSign();
 		logger.info("Clicked Symptoms Plus Again");
-		pvp.getSymptoms().sendKeys("Stomach pain");
-		Thread.sleep(1000);
+		pvp.getSymptoms().sendKeys(PatientVisit_Symptoms1);
 		logger.info("Entered Symptoms Again");
-		pvp.getClickingSymptomsPlusSign().click();
-		Thread.sleep(5000);
+		pvp.getClickingSymptomsPlusSign();
 		logger.info("Clicked Symptoms Plus Again");
-		pvp.getsymptomsDelete().click();
-		Thread.sleep(2000);
+		pvp.getsymptomsDelete();
 		logger.info("Clicked Symptoms Cancel Again");
-		pvp.getsymptomsDelete().click();
-		Thread.sleep(2000);
+		pvp.getsymptomsDelete();
 		logger.info("Clicked Symptoms Cancel Again");
 		
 	}
 	
 	@Test(priority = 5)
-	public void cancelInvstigations() throws InterruptedException {
+	public void cancelInvstigations()  {
 		PatientVisitPage pvp=new PatientVisitPage(driver);
-		JavascriptExecutor j=(JavascriptExecutor) driver;
-		j.executeScript("window.scrollBy(0,250)");
-		pvp.getInvestigationTests().sendKeys("Ecg Test");
-		Thread.sleep(2000);
+		pvp.getInvestigationTests().sendKeys(PatientVisit_investigations1);
 		logger.info("Entered Investigation Test");
-		pvp.getClickingInvestigationPlusSign().click();
-		Thread.sleep(2000);
+		pvp.getClickingInvestigationPlusSign();
 		logger.info("Clicked Investigation Plus Sign");
-		pvp.getInvestigationTests().sendKeys("Blood Test");
-		Thread.sleep(2000);
+		pvp.getInvestigationTests().sendKeys(PatientVisit_investigations2);
 		logger.info("Entered Investigation Test Again");
-		pvp.getClickingInvestigationPlusSign().click();
-		Thread.sleep(2000);
+		pvp.getClickingInvestigationPlusSign();
 		logger.info("Clicked Investigation Plus Sign Again");
-		pvp.getinvestigationDelete().click();
-		Thread.sleep(2000);
+		pvp.getinvestigationDelete();
 		logger.info("Clicked Investigations Delete Again");
-		pvp.getInvestigationTests().sendKeys("Platelet Count");
-		Thread.sleep(2000);
+		pvp.getInvestigationTests().sendKeys(PatientVisit_investigations1);
 		logger.info("Entered Investigation Test Again");
-		pvp.getClickingInvestigationPlusSign().click();
-		Thread.sleep(2000);
+		pvp.getClickingInvestigationPlusSign();
 		logger.info("Clicked Investigation Plus Sign Again");
-		pvp.getinvestigationDelete().click();
-		Thread.sleep(2000);
+		pvp.getinvestigationDelete();
 		logger.info("Clicked Investigations Delete Again");
-		pvp.getinvestigationDelete().click();
-		Thread.sleep(2000);
+		pvp.getinvestigationDelete();
 		logger.info("Clicked Investigations Delete");
 		
 	}
 	
 	@Test(priority = 6)
-	public void followup() throws InterruptedException {
+	public void followup() {
 		PatientVisitPage pvp=new PatientVisitPage(driver);
 		
-		Thread.sleep(3000);
-		pvp.getFollowup().click();
-		Thread.sleep(2000);
+		pvp.getFollowup();
 		logger.info("Clicked Follow Up");
-		pvp.getVisitReason().sendKeys("fever");
-		Thread.sleep(2000);
+		pvp.getVisitReason().sendKeys(PatientVisit_Reason);
 		pvp.getdateAndTimeFollowUp().click();
-		Thread.sleep(2000);
 		logger.info("Clicked Date and Time");
-		pvp.getdatePickFollowUp().click();
-		Thread.sleep(2000);
-		pvp.gettimePickFollowUp().click();
-		Thread.sleep(2000);
-		pvp.getAddAppointment().click();
-		Thread.sleep(3000);
+		pvp.getdatePickFollowUp();
+		pvp.gettimePickFollowUp();
+		pvp.getAddAppointment();
 		logger.info("Added Appointment");
 		
 		String expectedResult="Appointment added Successfully";
 		String actualResult=pvp.getfollowNotification().getText();
         Assert.assertEquals(actualResult, expectedResult);
         
-		pvp.getcancelNotification().click();
-		Thread.sleep(2000);
+		pvp.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
 		

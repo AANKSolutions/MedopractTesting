@@ -1,5 +1,9 @@
 package com.medopract.testscript;
 
+import java.io.IOException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -8,14 +12,24 @@ import com.medopract.generic.BaseClass;
 import com.medopract.pom.LoginPage;
 
 public class LoginTest extends BaseClass {
+	Logger logger= LogManager.getLogger(LoginTest.class);
+	String url;
+	String Login_UserName1;
+	String Login_UserName2;
+	String Login_Password1;
+	String Login_Password2;
 
 	@BeforeClass
-	public void OpenApplication() throws InterruptedException {
-		driver=OpenBrowser();
-		driver.manage().window().maximize();  
-		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
+	public void OpenApplication() throws IOException  {
+		driver=initializeDriver();
+		url=f.getPropertyData("url");
+		Login_UserName1=f.getExcelData("Login", 1, 1);
+		Login_UserName2=f.getExcelData("Login", 2, 1);
+		Login_Password1=f.getExcelData("Login", 3, 1);
+		Login_Password2=f.getExcelData("Login", 4, 1);
+		
+		driver.get(url);
 		logger.info("Navigated to Application URL");
-		Thread.sleep(2000);
 		
 		
 		Assert.assertEquals("MedoPract App", driver.getTitle());
@@ -23,119 +37,98 @@ public class LoginTest extends BaseClass {
 
 
 	@Test(priority = 1)
-	public void loginWithoutData() throws InterruptedException {
+	public void loginWithoutData()  {
 		LoginPage l=new LoginPage(driver);
-		l.getGotItButton().click();
-		Thread.sleep(2000);
-		l.getUsername().clear();
+		l.getGotItButton();
+	//	l.getUsername().clear();
 		logger.info("Entered Username without data");
-		Thread.sleep(2000);
-		l.getPassword().clear();
+		//l.getPassword().clear();
 		logger.info("Entered Username without data");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();
+		l.getSubmitButton();
 		logger.info("Clicked submit button");
-		Thread.sleep(2000);
 			
 		String expectedResult="No record available with Doctor ID :";
 		String actualResult=l.geterrorMsgNotification().getText();
 		Assert.assertEquals(actualResult, expectedResult);
 		
-		l.getcancelNotification().click();
-		Thread.sleep(2000);
-		logger.info("Clicked Cancel Notification");             	
+		l.getcancelNotification();
+		logger.info("Clicked Cancel Notification");     
+		       	
 	}
 	
 	@Test(priority = 2)
-	public void loginWithoutPassword() throws InterruptedException {
+	public void loginWithoutPassword()  {
 		LoginPage l=new LoginPage(driver);
 		
-		l.getUsername().sendKeys("ashwinkv016");
+		l.getUsername().sendKeys(Login_UserName1);
 		logger.info("Entered Username");
-		Thread.sleep(2000);
-		l.getPassword().clear();
-		logger.info("Cleared Password");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();;
+		//l.getPassword().clear();
+		//logger.info("Cleared Password");
+		l.getSubmitButton();
 		logger.info("Clicked submit button");
-		Thread.sleep(2000); 
 	
 
 		String expectedResult="Invalid Password!";
 		String actualResult=l.geterrorMsgNotification().getText();
 		Assert.assertEquals(actualResult, expectedResult);
 		
-		l.getcancelNotification().click();
-		Thread.sleep(2000);
+		l.getcancelNotification();
 		logger.info("Clicked Cancel Notification");    
 
 	}
 	
 	@Test(priority = 3)
-	public void loginWithoutUsername() throws InterruptedException {
+	public void loginWithoutUsername()  {
 		LoginPage l=new LoginPage(driver);
 		l.getUsername().clear();
-		l.getUsername().sendKeys(" ");
 		logger.info("Cleared Username without data");
-		Thread.sleep(2000);
-		l.getPassword().sendKeys("ashwinkv016");
+		l.getPassword().sendKeys(Login_Password1);
 		logger.info("Entered Password");
-		Thread.sleep(2000);
-		l.getSubmitButton().click();
+		l.getSubmitButton();
 		logger.info("Clicked submit button");
-		Thread.sleep(2000); 
 		
 
 		String expectedResult="No record available with Doctor ID :";
 		String actualResult=l.geterrorMsgNotification().getText();
 		Assert.assertEquals(actualResult, expectedResult);
 		
-		l.getcancelNotification().click();
-		Thread.sleep(2000);
+		l.getcancelNotification();
 		logger.info("Clicked Cancel Notification");    
 	}
 	
 	
 	@Test(priority=4)
-	public void incorrectDetails() throws InterruptedException {
+	public void incorrectDetails()  {
 		LoginPage l=new LoginPage(driver);
-		l.getUsername().clear();
-		l.getUsername().sendKeys("@#$%");
+		l.getUsername().sendKeys(Login_UserName2);
 		logger.info("Entered Username");
-		Thread.sleep(2000);
 		l.getPassword().clear();
-		l.getPassword().sendKeys("12345@@2");
+		l.getPassword().sendKeys(Login_Password2);
 		logger.info("Entered Password");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();;
+		l.getSubmitButton();
 		logger.info("Clicked submit button");
-		Thread.sleep(2000); 
 		
-		String expectedResult="No record available with Doctor ID :@#$%";
+		String expectedResult="No record available with Doctor ID :!*(&";
 		String actualResult=l.geterrorMsgNotification().getText();
 		Assert.assertEquals(actualResult, expectedResult);
 		
-		l.getcancelNotification().click();
-		Thread.sleep(7000);
+		l.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	
 	}
 	
 
 	@Test(priority = 5)
-	public void loginwithoutRememberMe() throws InterruptedException {
+	public void loginwithoutRememberMe()  {
 		LoginPage l=new LoginPage(driver);
 		l.getUsername().clear();
-		l.getUsername().sendKeys("ashwinkv016");
+		l.getUsername().sendKeys(Login_UserName1);
 		logger.info("Entered Username");
-		Thread.sleep(2000);
 		l.getPassword().clear();
-		l.getPassword().sendKeys("ashwinkv016");
+		l.getPassword().sendKeys(Login_Password1);
 		logger.info("Entered Password");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();
+		l.getSubmitButton();
 		logger.info("Clicked submit button");
-		Thread.sleep(5000); 
 				
 		String actual = null;
 		try {
@@ -147,28 +140,23 @@ public class LoginTest extends BaseClass {
 		}
 		Assert.assertEquals(actual, "success");
 		
-		l.getLogoutBtn().click();
-		Thread.sleep(5000);
+		l.getLogoutBtn();
 		logger.info("Clicked logout");
 	}
 	
 	@Test(priority = 6)
-	public void loginWithRememberMe() throws InterruptedException {
+	public void loginWithRememberMe()  {
 		LoginPage l=new LoginPage(driver);
-		l.getUsername().clear();
-		l.getUsername().sendKeys("ashwinkv016");
+		//l.getUsername().clear();
+		l.getUsername().sendKeys(Login_UserName1);
 		logger.info("Entered Username");
-		Thread.sleep(2000);
-		l.getPassword().clear();
-		l.getPassword().sendKeys("ashwinkv016");
+		//l.getPassword().clear();
+		l.getPassword().sendKeys(Login_Password1);
 		logger.info("Entered Password");
-		Thread.sleep(2000);
-		l.getrememberMeBtn().click();
-		Thread.sleep(2000);
+		l.getrememberMeBtn();
 		logger.info("Clicked Remember me Button");
-		l.getSubmitButton().submit();
+		l.getSubmitButton();
 		logger.info("Clicked submit button");
-		Thread.sleep(5000); 
 		
 		String actual = null;
 		try {

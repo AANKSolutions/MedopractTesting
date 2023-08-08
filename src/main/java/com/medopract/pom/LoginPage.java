@@ -41,41 +41,51 @@ public LoginPage(WebDriver driver){
  
   
 	
+	public void setUsername(String un) {
+		UsernameField.sendKeys(un);
+	}
+	
+	public void setPassword(String pw) {
+		 PasswordField.sendKeys(pw);
+	}
+	
 	public WebElement getUsername() {
 		return UsernameField;
-	}
-	
-	public WebElement geterrorMsgNotification() {
-		return errorMsgNotification;
-	}
-	
-	public WebElement getcancelNotification() {
-		return cancelNotification;
-	}
-	
-	public WebElement getaccInfo() {
-		return accInfo;
 	}
 	
 	public WebElement getPassword() {
 		return PasswordField;
 	}
 	
-	public WebElement getSubmitButton() {
-		return SubmitBtn;
+	public void getSubmitButton() {
+		 SubmitBtn.click();
 	}
 	
-	public WebElement getLogoutBtn() {
-		return LogoutBtn;
+	public WebElement geterrorMsgNotification() {
+		return errorMsgNotification;
 	}
 	
-	public WebElement getGotItButton() {
-		return gotItButton;
+	public void getcancelNotification() {
+		 cancelNotification.click();
 	}
 	
-	public WebElement getrememberMeBtn() {
-		return rememberMeBtn;
+	public WebElement getaccInfo() {
+		return accInfo;
 	}
+	
+	
+	public void getLogoutBtn() {
+		 LogoutBtn.click();
+	}
+	
+	public void getGotItButton() {
+		 gotItButton.click();
+	}
+	
+	public void getrememberMeBtn() {
+		 rememberMeBtn.click();
+	}
+
 	
 	}
 

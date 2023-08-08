@@ -3,8 +3,10 @@ package com.medopract.testscript;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
-import org.openqa.selenium.JavascriptExecutor;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -17,25 +19,36 @@ import com.medopract.pom.ViewPrescriptionPage;
 
 
 public class ViewPrescriptionTest extends BaseClass {
-@BeforeClass
-public void OpenApplication() throws InterruptedException {
-		driver=OpenBrowser();
+	Logger logger= LogManager.getLogger(ViewPrescriptionTest.class);
+	
+	String url;
+	String un;
+	String pw;
+	String ViewPrescription_Name;
+	
+	
+	@BeforeClass
+	public void OpenApplication() throws  IOException, InterruptedException {
+		driver= initializeDriver();
 		driver.manage().window().maximize();
-		driver.get("https://medopractapi-zk64betx7a-em.a.run.app/");
-		logger.info("Navigated to Application URL"); 
+		url = f.getPropertyData("url");
+		un = f.getPropertyData("un");
+		pw = f.getPropertyData("pw");
+		ViewPrescription_Name=f.getExcelData("View Prescription", 1, 2);
+		
+		
+		driver.get(url);
+		logger.info("Navigated to Application URL");
 
 		LoginPage l=new LoginPage(driver);
-		l.getGotItButton().click();
-		Thread.sleep(2000);
-		l.getUsername().sendKeys("ashwinkv016"); 
+		l.getGotItButton();
+		l.setUsername(un); 
 		logger.info("Entered UserName Field");
-		l.getPassword().sendKeys("ashwinkv016");
+		l.setPassword(pw);
 		logger.info("Entered Password Field");
-		Thread.sleep(2000);
-		l.getSubmitButton().submit();
+		l.getSubmitButton();
 		logger.info("Clicked Submit Button");
-		Thread.sleep(2000);
-		
+        Thread.sleep(3000);
 		String actual = null;
 		try {
 			if(l.getaccInfo().isDisplayed())
@@ -46,98 +59,83 @@ public void OpenApplication() throws InterruptedException {
 		}
 		Assert.assertEquals(actual, "success");
 	}
-@Test(priority=1)
-public void viewPrescription() throws InterruptedException {
-	ViewPrescriptionPage vpv=new ViewPrescriptionPage(driver);
-	vpv.getPrescriptionsLink().click();
-	logger.info("Clicked Prescription ");
-	Thread.sleep(2000);
-	vpv.getviewPrescriptionsLink().click();
-	logger.info("Clicked View Prescription");
-	Thread.sleep(2000);
-	vpv.getpatientNameField().sendKeys("Ashwin");
-	logger.info("Entered Patient Name");
-	Thread.sleep(2000);
-	vpv.getpatientNameFieldSugg().click();
-	logger.info("Clicked Patient Name Field Suggestion");
-	Thread.sleep(2000);
-	vpv.getprescriptionDetails().click();
-	logger.info("Clicked Prescription Details");
-	Thread.sleep(2000);
-	
-	String actual = null;
-	try {
-		if(vpv.getviewPrescriptionsuccessful().isDisplayed())
-			actual="success";
+	@Test(priority=1)
+	public void viewPrescription()  {
+		ViewPrescriptionPage vpv=new ViewPrescriptionPage(driver);
+		vpv.getPrescriptionsLink();
+		logger.info("Clicked Prescription");
+		vpv.getviewPrescriptionsLink();
+		logger.info("Clicked View Prescription");
+		vpv.getpatientNameField().sendKeys(ViewPrescription_Name);
+		logger.info("Entered Patient Name");
+		vpv.getpatientNameFieldSugg();
+		logger.info("Clicked Patient Name Field Suggestion");
+		vpv.getprescriptionDetails();
+		logger.info("Clicked Prescription Details");
+
+		String actual = null;
+		try {
+			if(vpv.getviewPrescriptionsuccessful().isDisplayed())
+				actual="success";
 			logger.info("Prescription viewed");
+		}
+		catch(Exception e) {
+			actual="failure";
+			logger.info("Prescription not viewed");
+		}
+		Assert.assertEquals(actual, "success");
 	}
-	catch(Exception e) {
-		actual="failure";
-		logger.info("Prescription not viewed");
+
+
+	@Test(priority=2)
+	public void printPrescription() throws  AWTException {
+		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
+		ap.getprintPrescription();
+		logger.info("Clicked PrintPrescription button");
+		Robot r=new Robot();
+		r.keyPress(KeyEvent.VK_ESCAPE);
+		logger.info("Return to Home Page");
 	}
-	Assert.assertEquals(actual, "success");
-}
 
+	@Test(priority=3)
+	public void downloadPrescription()  {
+		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
+		ap.getdownloadPrescription();
+		logger.info("Clicking Download Prescription Button");
+		ap.getdownloadPrescription();
+		logger.info(" Again Clicking Download Prescription Button");
+		ap.getdownloadPrescription();
+		logger.info(" Again Clicking Download Prescription Button");
+	}
+	@Test(priority = 4)
+	public void clickingBackButton()  {
+		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
+		ap.getbackPrescriptionbtn();
+		logger.info("Clicked Back Button");
+	}
 
-@Test(priority=2)
-public void printPrescription() throws InterruptedException, AWTException {
-	AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-	ap.getprintPrescription().click();
-	logger.info("Clicked PrintPrescription button");
-	Thread.sleep(4000);
-	Robot r=new Robot();
-	r.keyPress(KeyEvent.VK_ESCAPE);
-	logger.info("Return to Home Page");
-	Thread.sleep(2000);
-}
+	@Test(priority=5)
+	public void patientDetails() {
+		ViewPrescriptionPage vpv=new ViewPrescriptionPage(driver);
+		vpv.getgoToPatientDetails();
 
-@Test(priority=3)
-public void downloadPrescription() throws InterruptedException {
-	AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-	ap.getdownloadPrescription().click();
-	logger.info("Clicking Download Prescription Button");
-	Thread.sleep(4000);
-	ap.getdownloadPrescription().click();
-	logger.info(" Again Clicking Download Prescription Button");
-	Thread.sleep(4000);
-	ap.getdownloadPrescription().click();
-	logger.info(" Again Clicking Download Prescription Button");
-	Thread.sleep(4000);
-}
-@Test(priority = 4)
-public void clickingBackButton() throws InterruptedException {
-	AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-	ap.getbackPrescriptionbtn().click();
-	logger.info("Clicked Back Button");
-	Thread.sleep(3000);
-}
-
-@Test(priority=5)
-public void patientDetails() throws InterruptedException{
-	ViewPrescriptionPage vpv=new ViewPrescriptionPage(driver);
-	JavascriptExecutor j=(JavascriptExecutor)driver;
-	j.executeScript("window.scrollBy(0,750)");
-	Thread.sleep(2000);
-	vpv.getgoToPatientDetails().click();
-	Thread.sleep(4000);
-	
-	String actual = null;
-	try {
-		if(vpv.getpatientDetailsPage().isDisplayed())
-			actual="success";
+		String actual = null;
+		try {
+			if(vpv.getpatientDetailsPage().isDisplayed())
+				actual="success";
 			logger.info("Patient page viewed");
+		}
+		catch(Exception e) {
+			actual="failure";
+			logger.info("Patient page not viewed");
+		}
+		Assert.assertEquals(actual, "success");
 	}
-	catch(Exception e) {
-		actual="failure";
-		logger.info("Patient page not viewed");
-	}
-	Assert.assertEquals(actual, "success");
-}
 
 
-@AfterClass
-public void logout() {
-	driver.close();
-	logger.info("Closed Browser");
-}
+	@AfterClass
+	public void logout() {
+		driver.close();
+		logger.info("Closed Browser");
+	}
 }

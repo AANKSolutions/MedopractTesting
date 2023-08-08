@@ -19,7 +19,7 @@ public class AddPrescriptionPage {
 	
 	@FindBy(xpath="(//li[@class='AddPrescription_suggestion__3HFdG'])[2]")
 	WebElement patientNameSuggestion;
-	
+
 	@FindBy(name="email")                         
 	WebElement emailField;
 	
@@ -74,12 +74,12 @@ public class AddPrescriptionPage {
 	@FindBy(xpath="//div[@class='react-toast-notifications__toast__dismiss-button css-4hd0gx']")
 	WebElement cancelNotification;
 
-	public WebElement getclickPrescription() {
-		return clickPrescription;
+	public void getclickPrescription() {
+		 clickPrescription.click();
 	}
 	
-	public WebElement getcancelNotification() {
-		return cancelNotification;
+	public  void getcancelNotification() {
+		 cancelNotification.click();
 	}
 	
 	public WebElement getmedicineErrorMsg() {
@@ -98,16 +98,16 @@ public class AddPrescriptionPage {
 		return patientNameField;
 	}
 	
-	public WebElement getpatientNameSuggestion() {
-		return patientNameSuggestion;
+	public void getpatientNameSuggestion() {
+		 patientNameSuggestion.click();
 	}
 
 	public WebElement getEmailField() {
 		return emailField;
 	}
 
-	public WebElement getClickingPlusSign() {
-		return clickingPlusSign;
+	public void getClickingPlusSign() {
+		 clickingPlusSign.click();
 	}
 
 	public WebElement getMedicineNameField() {
@@ -126,36 +126,36 @@ public class AddPrescriptionPage {
 		return amountInput;
 	}
 
-	public WebElement getSaveAndPrintButton() {
-		return saveAndPrintButton;
+	public void getSaveAndPrintButton() {
+		 saveAndPrintButton.click();
 	}
 
-	public WebElement getBackButton() {
-		return backButton;
+	public void getBackButton() {
+		 backButton.click();
 	}
 
-    public WebElement getyesButtonField() {
-    	return yesButtonField;
+    public void getyesButtonField() {
+    	 yesButtonField.click();
     }
     
-    public WebElement getprescriptionBackBtn() {
-    	return prescriptionBackBtn;
+    public void getprescriptionBackBtn() {
+    	 prescriptionBackBtn.click();
     }
 		
-    public WebElement getprintPrescription() {
-    	return printPrescription;
+    public void getprintPrescription() {
+    	 printPrescription.click();
     }	
 	
-    public WebElement getdownloadPrescription() {
-    	return downloadPrescription;
+    public void getdownloadPrescription() {
+    	 downloadPrescription.click();
     }
 	
-    public WebElement getbackPrescriptionbtn() {
-    	return prescriptionBackBtn;
+    public void getbackPrescriptionbtn() {
+    	 prescriptionBackBtn.click();
     }
 	
-    public WebElement getdeleteMedicineField() {
-    	return deleteMedicine;
+    public void getdeleteMedicineField() {
+    	 deleteMedicine.click();
     }
 }
 

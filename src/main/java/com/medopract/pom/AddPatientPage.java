@@ -10,11 +10,9 @@ import com.medopract.generic.BaseClass;
 
 public class AddPatientPage extends BaseClass {
 	
-	public AddPatientPage(WebDriver driver) {
-		PageFactory.initElements(driver, this);
-	}
 	
-	@FindBy(xpath="(//a[text( )='Patients'])[1]")
+	
+	@FindBy(xpath="(//a[text()='Patients'])[1]")
 	WebElement patientsClick;
 	
 	@FindBy(xpath = "//div[@class='react-date-picker__inputGroup']")
@@ -98,8 +96,19 @@ public class AddPatientPage extends BaseClass {
 	@FindBy(xpath = "//span[@class='CreatePatientSidebar_patientId__3-vo7']")
 	WebElement patientId;
 	
-	public WebElement getPatientsClick() {
-		return patientsClick;
+	@FindBy(xpath="(//a[@class='CreatePatient_invsremove__byS1N'])[1]")
+	WebElement cancelHabit;
+	
+	public AddPatientPage(WebDriver driver) {
+		PageFactory.initElements(driver, this);
+	}
+	
+	public void getPatientsClick() {
+		 patientsClick.click();
+		 }
+	
+	public void getcancelHabit() {
+		 cancelHabit.click();
 	}
 	
 	public WebElement getnameErrorMsg() {
@@ -110,8 +119,8 @@ public class AddPatientPage extends BaseClass {
 		return patientId;
 	}
 	
-	public WebElement getcancelNotification () {
-		return cancelNotification;
+	public void getcancelNotification () {
+		 cancelNotification.click();
 	}
 	
 	public WebElement getErrorMessage() {
@@ -127,19 +136,19 @@ public class AddPatientPage extends BaseClass {
 		return createdSuccessfully;
 	}
 
-	public WebElement getAddPatientClick() {
-		return addPatientClick;
+	public void getAddPatientClick() {
+		 addPatientClick.click();
 	}
 
 	public WebElement getPatientNameField() {
 		return patientNameField;
 	}
 	
-	public WebElement getbirthDateField() {
-		return birthDateField;
+	public void getbirthDateField() {
+		 birthDateField.click();
 	}
 	
-	public WebElement getmonthField() {
+	public  WebElement getmonthField() {
 		return monthField;
 	}
 	
@@ -155,12 +164,12 @@ public class AddPatientPage extends BaseClass {
 		return phoneNoField;
 	}
 	
-	public WebElement getgenderField() {
-		return genderField;
+	public void getgenderField() {
+		 genderField.click();
 	}
 	
-	public WebElement getBloodGroupField() {
-		return bloodGroupField;
+	public void getBloodGroupField() {
+		 bloodGroupField.click();
 	}
 
 	public WebElement getOccupationField() {
@@ -191,8 +200,8 @@ public class AddPatientPage extends BaseClass {
 		return habitsField;
 	}
 
-	public WebElement getClickingPlusSign() {
-		return clickingPlusSign;
+	public void getClickingPlusSign() {
+		 clickingPlusSign.click();
 	}
 	
 	public WebElement getSelectImage() {
@@ -203,12 +212,12 @@ public class AddPatientPage extends BaseClass {
 		return capturePhoto;
 	}
 	
-	public WebElement getSaveButton() {
-		return saveButton;
-	}
+	public void getSaveButton() {
+		 saveButton.click();
+		 }
 	
-	public WebElement getResetButton() {
-		return resetButton;
+	public void getResetButton() {
+		 resetButton.click();
 	}
 	
 	

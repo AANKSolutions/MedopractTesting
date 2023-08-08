@@ -40,40 +40,40 @@ public class ReportsPage {
 
 
 
-	public WebElement getClickReports() {
-		return ClickReports;
+	public void getClickReports() {
+		 ClickReports.click();
 	}
 	
 	public WebElement gettodayDateView() {
 		return todayDateView;
 	}
 
-	public WebElement getClickAddPatient() {
-		return ClickAddPatient;
+	public void getClickAddPatient() {
+		 ClickAddPatient.click();
 	}
 
-	public WebElement getPatientsTab() {
-		return patientsTab;
+	public void getPatientsTab() {
+		 patientsTab.click();
 	}
 
-	public WebElement getYearlyTab() {
-		return yearlyTab;
+	public void getYearlyTab() {
+		 yearlyTab.click();
 	}
 
-	public WebElement getMonthlyTab() {
-		return monthlyTab;
+	public void getMonthlyTab() {
+		 monthlyTab.click();
 	}
 
-	public WebElement getWeeklyTab() {
-		return weeklyTab;
+	public void getWeeklyTab() {
+		 weeklyTab.click();
 	}
 
-	public WebElement getDailyTab() {
-		return dailyTab;
+	public void getDailyTab() {
+		 dailyTab.click();
 	}
 
-	public WebElement getCancelButton() {
-		return cancelButton;
+	public void getCancelButton() {
+		 cancelButton.click();
 	}
 
 }

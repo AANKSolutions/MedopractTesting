@@ -53,7 +53,7 @@ public class AppointmentsCalenderPage {
 	@FindBy(xpath = "//button[text()='Day']")
 	WebElement dayButton;
 
-	@FindBy(xpath = "//button[text( )='Agenda']")
+	@FindBy(xpath = "//button[text()='Agenda']")
 	WebElement agendaButton;
 
 	@FindBy(xpath = "//button[text()='Today']")
@@ -118,8 +118,8 @@ public class AppointmentsCalenderPage {
 	
 	
 
-	public WebElement getNewAppointment() {
-		return NewAppointment;
+	public void getNewAppointment() {
+		 NewAppointment.click();
 	}
 	
 	public WebElement getsuccessMsg() {
@@ -134,12 +134,12 @@ public class AppointmentsCalenderPage {
 		return errorMsg;
 	}
 	
-	public WebElement getcancelNotification() {
-		return cancelNotification;
+	public void getcancelNotification() {
+		 cancelNotification.click();
 	}
 
-	public WebElement getClickAppointmentCalender() {
-		return clickAppointmentCalender;
+	public void getClickAppointmentCalender() {
+		 clickAppointmentCalender.click();
 	}
 
 	public WebElement getFirstNameField() {
@@ -154,76 +154,76 @@ public class AppointmentsCalenderPage {
 		return visitreasonField;
 	}
 
-	public WebElement getdateAndTimeField() {
-		return dateAndTimeField;
+	public void getdateAndTimeField() {
+		 dateAndTimeField.click();
 	}
 	
-	public WebElement getdatePick() {
-		return datePick;
+	public void getdatePick() {
+		 datePick.click();
 	}
 	
-	public WebElement gettimePick() {
-		return timePick;
+	public void gettimePick() {
+		 timePick.click();
 	}
 	
 	public WebElement getContactNumberField() {
 		return contactNumberField;
 	}
 	
-	public WebElement getDurationField() {
-		return duration;
+	public void getDurationField() {
+		 duration.click();
 	}
 
-	public WebElement getSaveAppointmentButton() {
-		return saveAppointmentButton;
+	public void getSaveAppointmentButton() {
+		 saveAppointmentButton.click();
 	}
 
-	public WebElement getMonthButton() {
-		return monthButton;
+	public void getMonthButton() {
+		 monthButton.click();
 	}
 
-	public WebElement getWeekButton() {
-		return weekButton;
+	public void getWeekButton() {
+		 weekButton.click();
 	}
 
-	public WebElement getDayButton() {
-		return dayButton;
+	public void getDayButton() {
+		 dayButton.click();
 	}
 
-	public WebElement getAgendaButton() {
-		return agendaButton;
+	public void getAgendaButton() {
+		 agendaButton.click();
 	}
 
-	public WebElement getweekTodayButton() {
-		return weekTodayButton;
+	public void getweekTodayButton() {
+		 weekTodayButton.click();
 	}
 
-	public WebElement getweekBackButton() {
-		return weekBackButton;
+	public void getweekBackButton() {
+		 weekBackButton.click();
 	}
 
-	public WebElement getweekNextButton() {
-		return weekNextButton;
+	public void getweekNextButton() {
+		 weekNextButton.click();
 	}
 
-	public WebElement getTodayAgendaButton() {
-		return todayAgendaButton;
+	public void getTodayAgendaButton() {
+		 todayAgendaButton.click();
 	}
 
-	public WebElement getBackAgendaButton() {
-		return backAgendaButton;
+	public void getBackAgendaButton() {
+		 backAgendaButton.click();
 	}
 
-	public WebElement getNextAgendaButton() {
-		return nextAgendaButton;
+	public void getNextAgendaButton() {
+		 nextAgendaButton.click();
 	}
 
-	public WebElement getExistingAppointment() {
-		return existingAppointment;
+	public void getExistingAppointment() {
+		 existingAppointment.click();
 	}
 	
-	public WebElement getUpdatedExistingAppointment() {
-		return updatedExistingAppointment;
+	public void getUpdatedExistingAppointment() {
+		 updatedExistingAppointment.click();
 	}
 	
 	
@@ -231,32 +231,32 @@ public class AppointmentsCalenderPage {
 		return agendaExistingAppointment;
 	}
 	
-	public WebElement getcancelExistingAppointment() {
-		return cancelExistingAppointment;
+	public void getcancelExistingAppointment() {
+		 cancelExistingAppointment.click();
 	}
 
-	public WebElement getdayTodayButton() {
-		return dayTodayButton;
+	public void getdayTodayButton() {
+		 dayTodayButton.click();
 	}
 
-	public WebElement getdayBackButton() {
-		return dayBackButton;
+	public void getdayBackButton() {
+		 dayBackButton.click();
 	}
 
-	public WebElement getdayNextButton() {
-		return dayNextButton;
+	public void getdayNextButton() {
+		 dayNextButton.click();
 	}
 
-	public WebElement getmonthNextButton() {
-		return monthNextButton;
+	public void getmonthNextButton() {
+		 monthNextButton.click();
 	}
 
-	public WebElement getmonthTodayButton() {
-		return monthTodayButton;
+	public void getmonthTodayButton() {
+		 monthTodayButton.click();
 	}
 
-	public WebElement getmonthBackButton() {
-		return monthBackButton;
+	public void getmonthBackButton() {
+		 monthBackButton.click();
 	}
 	
 }
