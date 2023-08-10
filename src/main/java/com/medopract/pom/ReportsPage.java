@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ReportsPage {	
+import com.medopract.generic.BaseClass;
+
+public class ReportsPage extends BaseClass{	
 
 	public ReportsPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);

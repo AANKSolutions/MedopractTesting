@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ViewPrescriptionPage {
+import com.medopract.generic.BaseClass;
+
+public class ViewPrescriptionPage extends BaseClass{
 
 	public ViewPrescriptionPage(WebDriver driver){
 		PageFactory.initElements(driver, this);

@@ -4,8 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage{
-	//public WebDriver driver;
+import com.medopract.generic.BaseClass;
+
+public class LoginPage extends BaseClass{
 	
 public LoginPage(WebDriver driver){
 	PageFactory.initElements(driver, this);

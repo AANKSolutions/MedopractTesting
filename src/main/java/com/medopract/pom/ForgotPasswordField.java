@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ForgotPasswordField {
+import com.medopract.generic.BaseClass;
+
+public class ForgotPasswordField extends BaseClass{
 
 	public ForgotPasswordField(WebDriver driver) {
 		PageFactory.initElements(driver, this);

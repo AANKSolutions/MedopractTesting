@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class AppointmentsCalenderPage {
+import com.medopract.generic.BaseClass;
+
+public class AppointmentsCalenderPage extends BaseClass{
 
 	public AppointmentsCalenderPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);

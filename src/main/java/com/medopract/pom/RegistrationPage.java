@@ -5,10 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegistrationPage {
+import com.medopract.generic.BaseClass;
+
+public class RegistrationPage extends BaseClass{
 
 
-	public WebDriver driver;
+	//public WebDriver driver;
 
 	public RegistrationPage(WebDriver driver){
 

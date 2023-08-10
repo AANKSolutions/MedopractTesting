@@ -5,8 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.medopract.generic.BaseClass;
 
-public class ToDoList  {
+
+public class ToDoList extends BaseClass {
 	
 
 	@FindBy(xpath="(//a[.='+'])[2]")

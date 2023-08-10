@@ -4,8 +4,10 @@ package com.medopract.pom;
 	import org.openqa.selenium.WebElement;
 	import org.openqa.selenium.support.FindBy;
 	import org.openqa.selenium.support.PageFactory;
+
+import com.medopract.generic.BaseClass;
 	
-public class ViewOrEditPage {
+public class ViewOrEditPage extends BaseClass{
 
 	public ViewOrEditPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);

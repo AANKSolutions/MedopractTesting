@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePageAppointment {
+import com.medopract.generic.BaseClass;
+
+public class HomePageAppointment extends BaseClass{
 
 	public WebDriver driver;
 
