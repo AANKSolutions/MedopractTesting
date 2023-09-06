@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.poi.EncryptedDocumentException;
 import org.junit.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.medopract.generic.BaseClass;
-import com.medopract.generic.FileLib;
 import com.medopract.pom.HomePageAppointment;
 import com.medopract.pom.LoginPage;
 
@@ -17,56 +17,37 @@ import com.medopract.pom.LoginPage;
 public class HomePageAppointmentTest extends BaseClass {
 
 	Logger logger= LogManager.getLogger(HomePageAppointmentTest.class);
-	String url;
-	String un;
-	String pw;
-	String HomePageApp_Firstname1;
-	String HomePageApp_Firstname2;
-	String HomePageApp_Lastname;
-	String HomePageApp_VisitReason1;
-	String HomePageApp_VisitReason2;
-	String HomePageApp_Phno1;
-	String HomePageApp_Phno2;
 	
 	
 	@BeforeClass
 	public void openApplication() throws  IOException {
-		driver= initializeDriver();
-		 url = f.getPropertyData("url");
-		 un = f.getPropertyData("un");
-		 pw = f.getPropertyData("pw");
-		 HomePageApp_Firstname1=f.getExcelData("HomePage Appointments", 1, 1);
-		 HomePageApp_Firstname2=f.getExcelData("HomePage Appointments", 2, 1);
-		 HomePageApp_Lastname=f.getExcelData("HomePage Appointments", 3, 1);
-		 HomePageApp_VisitReason1= f.getExcelData("HomePage Appointments", 4, 1);
-		 HomePageApp_VisitReason2= f.getExcelData("HomePage Appointments", 5, 1);
-		 HomePageApp_Phno1= f.getExcelData("HomePage Appointments", 6, 1);
-		 HomePageApp_Phno2= f.getExcelData("HomePage Appointments", 7, 1);
-		 
-		 
-		driver.get(url);
-		logger.info("Navigated to Application URL");
-
-		LoginPage l=new LoginPage(driver);
-		l.getGotItButton();
-		l.setUsername(un); 
-		logger.info("Entered UserName Field");
-		l.setPassword(pw);
-		logger.info("Entered Password Field");
-		l.getSubmitButton();
-		logger.info("Clicked Submit Button");
 		
+		 
+		 
+		 driver= initializeDriver(); 
+			driver.get(getPropertyData("url"));
+			logger.info("Navigated to Application URL");
+	        base=new BaseClass();
+			LoginPage l=new LoginPage(driver);
+			l.getGotItButton();
+			l.setUsername(getPropertyData("un")); 
+			logger.info("Entered UserName Field");
+			l.setPassword(getPropertyData("pw"));
+			logger.info("Entered Password Field");
+			l.getSubmitButton();
+			logger.info("Clicked Submit Button");
+	         
 		String actual = null;
-		try {
-			if(l.getaccInfo().isDisplayed())
-				actual="success";
+			try {
+				if(l.getaccInfo().isDisplayed())
+					actual="success";
+			}
+			catch(Exception e) {
+				actual="failure";
+			}
+			Assert.assertEquals(actual, "success");
 		}
-		catch(Exception e) {
-			actual="failure";
-		}
-		Assert.assertEquals(actual, "success");
 
-	}
 	
 	@Test(priority = 1)
 	public void addAppointmentWithoutData()  {	
@@ -99,15 +80,15 @@ public class HomePageAppointmentTest extends BaseClass {
 	}
 	
 	@Test(priority = 3)
-	public void addAppointmentWithoutVisitReason()  {	
+	public void addAppointmentWithoutVisitReason() throws EncryptedDocumentException, IOException  {	
 		HomePageAppointment hpa = new HomePageAppointment(driver);
 		hpa.getClickingSigns();
 		logger.info("Clicked Plus");
-		hpa.getNameField().sendKeys(HomePageApp_Firstname1);
+		hpa.getNameField().sendKeys(getExcelData("HomePage Appointments", 1, 1));
 		logger.info("Entered Name");
-		hpa.getLastNameField().sendKeys(HomePageApp_Lastname);
+		hpa.getLastNameField().sendKeys(getExcelData("HomePage Appointments", 3, 1));
 		logger.info("Entered LastName");
-		hpa.getMobileField().sendKeys(HomePageApp_Phno1);
+		hpa.getMobileField().sendKeys(getExcelData("HomePage Appointments", 6, 1));
 		logger.info("Entered MobileNo");
 		hpa.getAddAppointmentButton();
 		logger.info("Clicked AddAppointment Button");
@@ -126,9 +107,9 @@ public class HomePageAppointmentTest extends BaseClass {
 	
      
 	@Test(priority = 4)
-	public void addAppointment()  {	
+	public void addAppointment() throws EncryptedDocumentException, IOException  {	
 		HomePageAppointment hpa = new HomePageAppointment(driver);
-		hpa.getVisitReasonField().sendKeys(HomePageApp_VisitReason1);
+		hpa.getVisitReasonField().sendKeys(getExcelData("HomePage Appointments", 4, 1));
 		logger.info("Entered VisitReason");
 		hpa.getAddAppointmentButton();
 		logger.info("Clicked AddAppointment Button");
@@ -142,13 +123,13 @@ public class HomePageAppointmentTest extends BaseClass {
 	}
 	
 	@Test(priority = 5)
-	public void addAppointmentwithoutContactNo() {	
+	public void addAppointmentwithoutContactNo() throws EncryptedDocumentException, IOException {	
 		HomePageAppointment hpa = new HomePageAppointment(driver);
-		hpa.getNameField().sendKeys(HomePageApp_Firstname1);
+		hpa.getNameField().sendKeys(getExcelData("HomePage Appointments", 1, 1));
 		logger.info("Entered Name");
-		hpa.getLastNameField().sendKeys(HomePageApp_Lastname);
+		hpa.getLastNameField().sendKeys(getExcelData("HomePage Appointments", 3, 1));
 		logger.info("Entered LastName");
-		hpa.getVisitReasonField().sendKeys(HomePageApp_VisitReason1);
+		hpa.getVisitReasonField().sendKeys(getExcelData("HomePage Appointments", 4, 1));
 		logger.info("Entered VisitReason");
 		hpa.getMobileField().clear();
 		logger.info("Entered MobileNo");
@@ -165,14 +146,14 @@ public class HomePageAppointmentTest extends BaseClass {
 
 
 	@Test(priority = 6)
-	public void EditExistingAppointment() {
+	public void EditExistingAppointment() throws EncryptedDocumentException, IOException {
 		HomePageAppointment hpa = new HomePageAppointment(driver);
 		hpa.getEditExistingAppointment();
 		logger.info("clicked on Edit option");
 		hpa.getNameField().clear();
-		hpa.getNameField().sendKeys(HomePageApp_Firstname2);
+		hpa.getNameField().sendKeys(getExcelData("HomePage Appointments", 2, 1));
 		hpa.getMobileField().clear();
-		hpa.getMobileField().sendKeys(HomePageApp_Phno2);
+		hpa.getMobileField().sendKeys(getExcelData("HomePage Appointments", 7, 1));
 		hpa.getUpdateButton();
 		logger.info("clicked on Update Button");
 		

@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.poi.EncryptedDocumentException;
 import org.junit.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,51 +20,23 @@ import com.medopract.pom.LoginPage;
 public class AddPrescriptionTest extends BaseClass {
 	Logger logger= LogManager.getLogger(AddPrescriptionTest.class);
 
-	String url;
-	String un;
-	String pw;
-	String AddPrescription_Patientname;
-	String AddPrescription_Email_Id;
-	String AddPrescription_MedicineName1;
-	String AddPrescription_MedicineName2;
-	String AddPrescription_NoOfDays1;
-	String AddPrescription_NoOfDays2;
-	String AddPrescription_Instructions1;
-	String AddPrescription_Instructions2;
-	String AddPrescription_AmountToTake1;
-	String AddPrescription_AmountToTake2;
-
 
 	@BeforeClass
 	public void OpenApplication() throws IOException {
-		driver= initializeDriver();
-		url = f.getPropertyData("url");
-		un = f.getPropertyData("un");
-		pw = f.getPropertyData("pw");
-		AddPrescription_Patientname=f.getExcelData("Add Prescription", 1, 1);
-		AddPrescription_Email_Id=f.getExcelData("Add Prescription", 2, 2);
-		AddPrescription_MedicineName1=f.getExcelData("Add Prescription", 3, 1);
-		AddPrescription_MedicineName2=f.getExcelData("Add Prescription", 4, 1);
-		AddPrescription_NoOfDays1=f.getExcelData("Add Prescription", 5, 1);
-		AddPrescription_NoOfDays2=f.getExcelData("Add Prescription", 6, 1);
-		AddPrescription_Instructions1=f.getExcelData("Add Prescription", 7, 1);
-		AddPrescription_Instructions2=f.getExcelData("Add Prescription", 8, 1);
-		AddPrescription_AmountToTake1=f.getExcelData("Add Prescription", 9, 1);
-		AddPrescription_AmountToTake2=f.getExcelData("Add Prescription", 10, 1);
-		
-		driver.get(url);
+		driver= initializeDriver(); 
+		driver.get(getPropertyData("url"));
 		logger.info("Navigated to Application URL");
-
+        base=new BaseClass();
 		LoginPage l=new LoginPage(driver);
 		l.getGotItButton();
-		l.setUsername(un); 
+		l.setUsername(getPropertyData("un")); 
 		logger.info("Entered UserName Field");
-		l.setPassword(pw);
+		l.setPassword(getPropertyData("pw"));
 		logger.info("Entered Password Field");
 		l.getSubmitButton();
 		logger.info("Clicked Submit Button");
-
-		String actual = null;
+         
+	String actual = null;
 		try {
 			if(l.getaccInfo().isDisplayed())
 				actual="success";
@@ -73,17 +46,16 @@ public class AddPrescriptionTest extends BaseClass {
 		}
 		Assert.assertEquals(actual, "success");
 	}
-
 	@Test(priority = 1)
-	public void withoutAddingMedicineField()  {
+	public void withoutAddingMedicineField() throws EncryptedDocumentException, IOException  {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
 		ap.getclickPrescription();
 		logger.info("Clicked on Prescription");
-		ap.getPatientNameField().sendKeys(AddPrescription_Patientname);
+		ap.getPatientNameField().sendKeys(getExcelData("Add Prescription", 1, 1));
 		logger.info("Entered Patient Name");
 		ap.getpatientNameSuggestion();
 		logger.info("Clicked Patient Name Suggestion");
-		ap.getEmailField().sendKeys(AddPrescription_Email_Id);
+		ap.getEmailField().sendKeys(getExcelData("Add Prescription", 2, 2));
 		logger.info("Entered Email Field");
 		ap.getSaveAndPrintButton();
 		logger.info("Clicked Save and Print Button");
@@ -97,15 +69,15 @@ public class AddPrescriptionTest extends BaseClass {
 	}
 
 	@Test(priority = 2)
-	public void addPrescription()  {
+	public void addPrescription() throws EncryptedDocumentException, IOException  {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName1);
+		ap.getMedicineNameField().sendKeys(getExcelData("Add Prescription", 3, 1));
 		logger.info("Entered Medicine Name");
-		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays1);
+		ap.getTotalNumberDays().sendKeys(getExcelData("Add Prescription", 5, 1));
 		logger.info("Entered Total Number Of Days");
-		ap.getTimingsInput().sendKeys(AddPrescription_Instructions1);
+		ap.getTimingsInput().sendKeys(getExcelData("Add Prescription", 7, 1));
 		logger.info("Entered Time Inputs");
-		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake1);
+		ap.getAmountInput().sendKeys(getExcelData("Add Prescription", 9, 1));
 		logger.info("Entered number Of amount to be used");
 		ap.getClickingPlusSign();
 		logger.info("Clicked Medicine Field Plus Sign");
@@ -165,33 +137,33 @@ public class AddPrescriptionTest extends BaseClass {
 	}
 
 	@Test(priority =6 )
-	public void cancelAddedMedicineField()  {
+	public void cancelAddedMedicineField() throws EncryptedDocumentException, IOException  {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
 		ap.getclickPrescription();
 		logger.info("Clicked on Prescription");
-		ap.getPatientNameField().sendKeys(AddPrescription_Patientname);
+		ap.getPatientNameField().sendKeys(getExcelData("Add Prescription", 1, 1));
 		logger.info("Entered Patient Name");
 		ap.getpatientNameSuggestion();
 		logger.info("Clicked Patient Name Suggestion");
-		ap.getEmailField().sendKeys(AddPrescription_Email_Id);
+		ap.getEmailField().sendKeys(getExcelData("Add Prescription", 2, 2));
 		logger.info("Entered Email Field");
-		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName1);
+		ap.getMedicineNameField().sendKeys(getExcelData("Add Prescription", 3, 1));
 		logger.info("Entered Medicine Name");
-		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays1);
+		ap.getTotalNumberDays().sendKeys(getExcelData("Add Prescription", 5, 1));
 		logger.info("Entered Total Number Of Days");
-		ap.getTimingsInput().sendKeys(AddPrescription_Instructions1);
+		ap.getTimingsInput().sendKeys(getExcelData("Add Prescription", 7, 1));
 		logger.info("Entered Time Inputs");
-		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake1);
+		ap.getAmountInput().sendKeys(getExcelData("Add Prescription", 9, 1));
 		logger.info("Entered number Of amount to be used");
 		ap.getClickingPlusSign();
 		logger.info("Clicked Medicine Field Plus Sign");
-		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName1);
+		ap.getMedicineNameField().sendKeys(getExcelData("Add Prescription", 3, 1));
 		logger.info("Again entering Medicine Name");
-		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays1);
+		ap.getTotalNumberDays().sendKeys(getExcelData("Add Prescription", 5, 1));
 		logger.info("Again entering  Total Number Of Days");
-		ap.getTimingsInput().sendKeys(AddPrescription_Instructions1);
+		ap.getTimingsInput().sendKeys(getExcelData("Add Prescription", 7, 1));
 		logger.info("Again entering  Time Inputs");
-		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake1);
+		ap.getAmountInput().sendKeys(getExcelData("Add Prescription", 9, 1));
 		logger.info("Again entering  number Of amount to be used");
 		ap.getClickingPlusSign();
 		logger.info("Again clicking Medicine Field Plus Sign");
@@ -203,15 +175,15 @@ public class AddPrescriptionTest extends BaseClass {
 	}
 
 	@Test(priority=7)
-	public void withInvaliedMedicineField() {
+	public void withInvaliedMedicineField() throws EncryptedDocumentException, IOException {
 		AddPrescriptionPage ap=new AddPrescriptionPage(driver);
-		ap.getMedicineNameField().sendKeys(AddPrescription_MedicineName2);
+		ap.getMedicineNameField().sendKeys(getExcelData("Add Prescription", 4, 1));
 		logger.info("Entered Medicine Name");
-		ap.getTotalNumberDays().sendKeys(AddPrescription_NoOfDays2);
+		ap.getTotalNumberDays().sendKeys(getExcelData("Add Prescription", 6, 1));
 		logger.info("Entered Total Number Of Days");
-		ap.getTimingsInput().sendKeys(AddPrescription_Instructions2);
+		ap.getTimingsInput().sendKeys(getExcelData("Add Prescription", 8, 1));
 		logger.info("Entered Time Inputs");
-		ap.getAmountInput().sendKeys(AddPrescription_AmountToTake2);
+		ap.getAmountInput().sendKeys(getExcelData("Add Prescription", 10, 1));
 		logger.info("Entered number Of amount to be used");
 		ap.getClickingPlusSign();
 		logger.info("Clicked Medicine Field Plus Sign");

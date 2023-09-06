@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.poi.EncryptedDocumentException;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -20,35 +21,23 @@ import com.medopract.pom.ViewPrescriptionPage;
 
 public class ViewPrescriptionTest extends BaseClass {
 	Logger logger= LogManager.getLogger(ViewPrescriptionTest.class);
-	
-	String url;
-	String un;
-	String pw;
-	String ViewPrescription_Name;
-	
-	
+
+
 	@BeforeClass
 	public void OpenApplication() throws  IOException, InterruptedException {
-		driver= initializeDriver();
-		driver.manage().window().maximize();
-		url = f.getPropertyData("url");
-		un = f.getPropertyData("un");
-		pw = f.getPropertyData("pw");
-		ViewPrescription_Name=f.getExcelData("View Prescription", 1, 2);
-		
-		
-		driver.get(url);
+		driver= initializeDriver(); 
+		driver.get(getPropertyData("url"));
 		logger.info("Navigated to Application URL");
-
+		base=new BaseClass();
 		LoginPage l=new LoginPage(driver);
 		l.getGotItButton();
-		l.setUsername(un); 
+		l.setUsername(getPropertyData("un")); 
 		logger.info("Entered UserName Field");
-		l.setPassword(pw);
+		l.setPassword(getPropertyData("pw"));
 		logger.info("Entered Password Field");
 		l.getSubmitButton();
 		logger.info("Clicked Submit Button");
-        Thread.sleep(3000);
+
 		String actual = null;
 		try {
 			if(l.getaccInfo().isDisplayed())
@@ -59,14 +48,15 @@ public class ViewPrescriptionTest extends BaseClass {
 		}
 		Assert.assertEquals(actual, "success");
 	}
+
 	@Test(priority=1)
-	public void viewPrescription()  {
+	public void viewPrescription() throws EncryptedDocumentException, IOException  {
 		ViewPrescriptionPage vpv=new ViewPrescriptionPage(driver);
 		vpv.getPrescriptionsLink();
 		logger.info("Clicked Prescription");
 		vpv.getviewPrescriptionsLink();
 		logger.info("Clicked View Prescription");
-		vpv.getpatientNameField().sendKeys(ViewPrescription_Name);
+		vpv.getpatientNameField().sendKeys(getExcelData("View Prescription", 1, 2));
 		logger.info("Entered Patient Name");
 		vpv.getpatientNameFieldSugg();
 		logger.info("Clicked Patient Name Field Suggestion");

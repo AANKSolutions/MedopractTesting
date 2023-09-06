@@ -66,7 +66,7 @@ public class AddPatientPage extends BaseClass {
 	@FindBy(name="habits")
 	WebElement habitsField;
 	
-	@FindBy(xpath="//a[@class='CreatePatient_addinvestigationtests__18P-9']")
+	@FindBy(xpath="//a[@class='CreatePatient_addinvestigationtests__YzTHc']")
 	WebElement clickingPlusSign;
 	
 	@FindBy(id="fileButton")
@@ -96,7 +96,7 @@ public class AddPatientPage extends BaseClass {
 	@FindBy(xpath = "//span[@class='CreatePatientSidebar_patientId__3-vo7']")
 	WebElement patientId;
 	
-	@FindBy(xpath="(//a[@class='CreatePatient_invsremove__byS1N'])[1]")
+	@FindBy(xpath="//a[@class='CreatePatient_invsremove__RIVCa']")
 	WebElement cancelHabit;
 	
 	public AddPatientPage(WebDriver driver) {
@@ -104,6 +104,7 @@ public class AddPatientPage extends BaseClass {
 	}
 	
 	public void getPatientsClick() {
+		
 		 patientsClick.click();
 		 }
 	
@@ -213,7 +214,7 @@ public class AddPatientPage extends BaseClass {
 	}
 	
 	public void getSaveButton() {
-		 saveButton.click();
+	    saveButton.click();
 		 }
 	
 	public void getResetButton() {

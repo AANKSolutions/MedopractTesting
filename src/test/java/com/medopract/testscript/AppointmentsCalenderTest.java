@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.poi.EncryptedDocumentException;
 import org.junit.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,75 +15,49 @@ import com.medopract.pom.LoginPage;
 
 public class AppointmentsCalenderTest extends BaseClass {
 	Logger logger= LogManager.getLogger(AppointmentsCalenderTest.class);
-	String url;
-	String un;
-	String pw;
-    String Appointments_FirstName1;
-    String Appointments_FirstName2;
-    String Appointments_LastName1;
-	String Appointments_LastName2;
-	String Appointments_VisitReason1;
-	String Appointments_VisitReason2;
-	String Appointments_VisitReason3;
-	String Appointments_Phno1;
-	String Appointments_Phno2;
 	
 	
 	@BeforeClass
 	public void OpenApplication() throws IOException, InterruptedException {
-		driver= initializeDriver();
-		
-		 url = f.getPropertyData("url");
-		 un = f.getPropertyData("un");
-		 pw = f.getPropertyData("pw");
-		 Appointments_FirstName1=f.getExcelData("Appointments Calender", 1, 1);
-		 Appointments_FirstName2=f.getExcelData("Appointments Calender", 2, 1);
-		 Appointments_LastName1=f.getExcelData("Appointments Calender", 3, 1);
-		 Appointments_LastName2=f.getExcelData("Appointments Calender", 4, 1);
-		 Appointments_VisitReason1=f.getExcelData("Appointments Calender", 5, 1);
-		 Appointments_VisitReason2=f.getExcelData("Appointments Calender", 6, 1);
-		 Appointments_VisitReason3=f.getExcelData("Appointments Calender", 7, 1);
-		 Appointments_Phno1=f.getExcelData("Appointments Calender", 8, 1);
-		 Appointments_Phno2=f.getExcelData("Appointments Calender", 9, 1);
-	    
 		   
-		driver.get(url);
-		logger.info("Navigated to Application URL");
-
-		LoginPage l=new LoginPage(driver);
-		l.getGotItButton();
-		l.setUsername(un); 
-		logger.info("Entered UserName Field");
-		l.setPassword(pw);
-		logger.info("Entered Password Field");
-		l.getSubmitButton();
-		logger.info("Clicked Submit Button");
-		//Thread.sleep(2000);
+		 driver= initializeDriver(); 
+			driver.get(getPropertyData("url"));
+			logger.info("Navigated to Application URL");
+	        base=new BaseClass();
+			LoginPage l=new LoginPage(driver);
+			l.getGotItButton();
+			l.setUsername(getPropertyData("un")); 
+			logger.info("Entered UserName Field");
+			l.setPassword(getPropertyData("pw"));
+			logger.info("Entered Password Field");
+			l.getSubmitButton();
+			logger.info("Clicked Submit Button");
+	         
 		String actual = null;
-		try {
-			if(l.getaccInfo().isDisplayed())
-				actual="success";
+			try {
+				if(l.getaccInfo().isDisplayed())
+					actual="success";
+			}
+			catch(Exception e) {
+				actual="failure";
+			}
+			Assert.assertEquals(actual, "success");
 		}
-		catch(Exception e) {
-			actual="failure";
-		}
-		Assert.assertEquals(actual, "success");
-	}
 
 	@Test(priority=1)
-	public void AddAppointmentsCalender()  {
+	public void AddAppointmentsCalender() throws EncryptedDocumentException, IOException  {
 		AppointmentsCalenderPage acp=new AppointmentsCalenderPage(driver);
 		acp.getClickAppointmentCalender();
 		logger.info("Clicked Appointment Calender");
 		acp.getNewAppointment();
 		logger.info("Clicked New Appointment");
-		acp.getFirstNameField().sendKeys(Appointments_FirstName1);
+		acp.getFirstNameField().sendKeys(getExcelData("Appointments Calender", 1, 1));
 		logger.info("Entered FirstName Field");
-		acp.getLastNameField().sendKeys(Appointments_LastName1);
+		acp.getLastNameField().sendKeys(getExcelData("Appointments Calender", 3, 1));
 		logger.info("Entered LastName Field");
-		acp.getVisitreasonField().sendKeys(Appointments_VisitReason1);
+		acp.getVisitreasonField().sendKeys(getExcelData("Appointments Calender", 5, 1));
 		logger.info("Entered VisitReason Field");
-		acp.getContactNumberField().sendKeys(Appointments_Phno1);
+		acp.getContactNumberField().sendKeys(getExcelData("Appointments Calender", 8, 1));
 		logger.info("Entered ContactNumber Field");
 		acp.getdateAndTimeField();
 		logger.info("Clicked DateAndTime Field");
@@ -102,13 +77,13 @@ public class AppointmentsCalenderTest extends BaseClass {
 	}
 	
 	@Test(priority=2)
-	public void AddAppointmentWithoutName()  {
+	public void AddAppointmentWithoutName() throws EncryptedDocumentException, IOException  {
 		AppointmentsCalenderPage acp=new AppointmentsCalenderPage(driver);
 		acp.getNewAppointment();
 		logger.info("Clicked New Appointment");
-		acp.getVisitreasonField().sendKeys(Appointments_VisitReason1);
+		acp.getVisitreasonField().sendKeys(getExcelData("Appointments Calender", 5, 1));
 		logger.info("Entered VisitReason Field");
-		acp.getContactNumberField().sendKeys(Appointments_Phno1);
+		acp.getContactNumberField().sendKeys(getExcelData("Appointments Calender", 8, 1));
 		logger.info("Entered ContactNumber Field");
 		acp.getdateAndTimeField();
 		logger.info("Clicked DateAndTime Field");
@@ -128,15 +103,15 @@ public class AppointmentsCalenderTest extends BaseClass {
 	}
 	
 	@Test(priority =3)
-	public void AddAppointmentWithoutVisitReason()  {
+	public void AddAppointmentWithoutVisitReason() throws EncryptedDocumentException, IOException  {
 	AppointmentsCalenderPage acp=new AppointmentsCalenderPage(driver);
 	acp.getNewAppointment();
 	logger.info("Clicked New Appointment");
-	acp.getFirstNameField().sendKeys(Appointments_FirstName1);
+	acp.getFirstNameField().sendKeys(getExcelData("Appointments Calender", 1, 1));
 	logger.info("Entered FirstName Field");
-	acp.getLastNameField().sendKeys(Appointments_LastName1);
+	acp.getLastNameField().sendKeys(getExcelData("Appointments Calender", 3, 1));
 	logger.info("Entered LastName Field");
-	acp.getContactNumberField().sendKeys(Appointments_Phno1);
+	acp.getContactNumberField().sendKeys(getExcelData("Appointments Calender", 8, 1));
 	logger.info("Entered ContactNumber Field");
 	acp.getdateAndTimeField();
 	logger.info("Clicked DateAndTime Field");
@@ -156,15 +131,15 @@ public class AppointmentsCalenderTest extends BaseClass {
 	}
 
 	@Test(priority=4)
-	public void addPatientWithoutContactNo()  {
+	public void addPatientWithoutContactNo() throws EncryptedDocumentException, IOException  {
 		AppointmentsCalenderPage acp=new AppointmentsCalenderPage(driver);
 		acp.getNewAppointment();
 		logger.info("Clicked New Appointment");
-		acp.getFirstNameField().sendKeys(Appointments_FirstName1);
+		acp.getFirstNameField().sendKeys(getExcelData("Appointments Calender", 1, 1));
 		logger.info("Entered FirstName Field");
-		acp.getLastNameField().sendKeys(Appointments_LastName1);
+		acp.getLastNameField().sendKeys(getExcelData("Appointments Calender", 3, 1));
 		logger.info("Entered LastName Field");
-		acp.getVisitreasonField().sendKeys(Appointments_VisitReason1);
+		acp.getVisitreasonField().sendKeys(getExcelData("Appointments Calender", 5, 1));
 		logger.info("Entered VisitReason Field");
 		acp.getdateAndTimeField();
 		logger.info("Clicked DateAndTime Field");
@@ -211,21 +186,21 @@ public class AppointmentsCalenderTest extends BaseClass {
 	
 
 	@Test(priority=6)
-	public void updateAppointmentWithValidData()  {
+	public void updateAppointmentWithValidData() throws EncryptedDocumentException, IOException  {
 		AppointmentsCalenderPage acp=new AppointmentsCalenderPage(driver);
 		acp.getUpdatedExistingAppointment();
 		logger.info("Clicked ExistingAppointment");
 		acp.getFirstNameField().clear();
-		acp.getFirstNameField().sendKeys(Appointments_FirstName2);
+		acp.getFirstNameField().sendKeys(getExcelData("Appointments Calender", 2, 1));
 		logger.info("Entered FirstName Field");
 		acp.getLastNameField().clear();
-		acp.getLastNameField().sendKeys(Appointments_LastName2);
+		acp.getLastNameField().sendKeys(getExcelData("Appointments Calender", 4, 1));
 		logger.info("Entered LastName Field");
 		acp.getVisitreasonField().clear();
-		acp.getVisitreasonField().sendKeys(Appointments_VisitReason2);
+		acp.getVisitreasonField().sendKeys(getExcelData("Appointments Calender", 6, 1));
 		logger.info("Entered VisitReason Field");
 		acp.getContactNumberField().clear();
-		acp.getContactNumberField().sendKeys(Appointments_Phno2);
+		acp.getContactNumberField().sendKeys(getExcelData("Appointments Calender", 9, 1));
 		logger.info("Entered ContactNo Field");
 		acp.getDurationField();
 		logger.info("Entered Duration Field");
@@ -241,7 +216,7 @@ public class AppointmentsCalenderTest extends BaseClass {
 	}
 
 	@Test(priority=7)
-	public void existingAppointmentInMonth()  {
+	public void existingAppointmentInMonth() throws EncryptedDocumentException, IOException  {
 		AppointmentsCalenderPage acp=new AppointmentsCalenderPage(driver);
 		acp.getMonthButton();
 		acp.getExistingAppointment();
@@ -251,7 +226,7 @@ public class AppointmentsCalenderTest extends BaseClass {
 		acp.getExistingAppointment();
 		logger.info("Clicked ExistingAppointment");
 		acp.getVisitreasonField().clear();
-		acp.getVisitreasonField().sendKeys(Appointments_VisitReason1);
+		acp.getVisitreasonField().sendKeys(getExcelData("Appointments Calender", 5, 1));
 		logger.info("Entered VisitReason Field");
 		acp.getSaveAppointmentButton();
 		logger.info("Clicked Save Button");
@@ -264,13 +239,13 @@ public class AppointmentsCalenderTest extends BaseClass {
 	}
 	
 	@Test(priority=8)
-	public void existingAppointmentInWeek()  {
+	public void existingAppointmentInWeek() throws EncryptedDocumentException, IOException  {
 		AppointmentsCalenderPage acp=new AppointmentsCalenderPage(driver);
 		acp.getWeekButton();
 		acp.getExistingAppointment();
 		logger.info("Clicked ExistingAppointment");
 		acp.getVisitreasonField().clear();
-		acp.getVisitreasonField().sendKeys(Appointments_VisitReason2);
+		acp.getVisitreasonField().sendKeys(getExcelData("Appointments Calender", 6, 1));
 		logger.info("Entered Visit Reason");
 		acp.getSaveAppointmentButton();
 		logger.info("Clicked Save Button");

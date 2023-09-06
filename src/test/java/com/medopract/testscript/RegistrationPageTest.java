@@ -19,27 +19,13 @@ import com.medopract.pom.RegistrationPage;
 public class RegistrationPageTest extends BaseClass {
 
 	Logger logger= LogManager.getLogger(RegistrationPageTest.class);
-	String url;
-	String Registration_FullName;
-	String Registration_Email;
-	String Registration_Phno;
-	String Registration_UserName;
-	String Registration_CnfrmUserName;
-	String Registration_INCnfrmUserName;
-	
 	
 	@BeforeClass
 	public void OpenApplication() throws EncryptedDocumentException, IOException  {
 		driver=initializeDriver();
-		 url = f.getPropertyData("url");
-		Registration_FullName=f.getExcelData("Registration Page", 1, 1);
-		Registration_Email=f.getExcelData("Registration Page", 2, 1);
-		Registration_Phno=f.getExcelData("Registration Page", 3, 1);
-		Registration_UserName=f.getExcelData("Registration Page", 4, 1);
-		Registration_CnfrmUserName=f.getExcelData("Registration Page", 5, 1);
-		Registration_INCnfrmUserName=f.getExcelData("Registration Page", 6, 1);
 		
-		driver.get(url);
+		
+		driver.get(getPropertyData("url"));
 		logger.info("Navigated to Application URL");
 	}
 
@@ -67,17 +53,17 @@ public class RegistrationPageTest extends BaseClass {
 	}
 
 	@Test(priority = 2)
-	public void Registration()  {
+	public void Registration() throws EncryptedDocumentException, IOException  {
 		RegistrationPage rp=new RegistrationPage(driver);
-		rp.nameField.sendKeys(Registration_FullName);
+		rp.nameField.sendKeys(getExcelData("Registration Page", 1, 1));
 		logger.info("Entered Name");
-		rp.getemailField().sendKeys(Registration_Email);
+		rp.getemailField().sendKeys(getExcelData("Registration Page", 2, 1));
 		logger.info("Entered Email Address");
-		rp.getmobileField().sendKeys(Registration_Phno);
+		rp.getmobileField().sendKeys(getExcelData("Registration Page", 3, 1));
 		logger.info("Entered Phone Number");
-		rp.getuserNameField().sendKeys(Registration_UserName);
+		rp.getuserNameField().sendKeys(getExcelData("Registration Page", 4, 1));
 		logger.info("Entered UserName");
-		rp.getconfirmUserNameField().sendKeys(Registration_CnfrmUserName);
+		rp.getconfirmUserNameField().sendKeys(getExcelData("Registration Page", 5, 1));
 		logger.info("Entered ConfirmUserName");
 		rp.getagreetermCheckBox();
 		logger.info("Clicked Checkbox");
@@ -131,9 +117,9 @@ public class RegistrationPageTest extends BaseClass {
 	}
 
 	@Test(priority =5)
-	public void invalidConfirmUsernameField()  {
+	public void invalidConfirmUsernameField() throws EncryptedDocumentException, IOException  {
 		RegistrationPage rp=new RegistrationPage(driver);
-		rp.getconfirmUserNameField().sendKeys(Registration_INCnfrmUserName);
+		rp.getconfirmUserNameField().sendKeys(getExcelData("Registration Page", 6, 1));
 		logger.info("Entered ConfirmUserName");
 		rp.getclickRegisterButton();
 		logger.info("Clicked On Register Button");
@@ -151,10 +137,10 @@ public class RegistrationPageTest extends BaseClass {
 	}
 
 	@Test(priority = 6)
-	public void withoutAgreeTermCheckBox()  {
+	public void withoutAgreeTermCheckBox() throws EncryptedDocumentException, IOException  {
 		RegistrationPage rp=new RegistrationPage(driver);
 		rp.getconfirmUserNameField().clear();
-		rp.getconfirmUserNameField().sendKeys(Registration_CnfrmUserName);
+		rp.getconfirmUserNameField().sendKeys(getExcelData("Registration Page", 4, 1));
 		rp.getagreetermCheckBox();
 		logger.info("Clicked Checkbox");
 		rp.getclickRegisterButton();

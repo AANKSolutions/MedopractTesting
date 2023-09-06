@@ -27,7 +27,7 @@ public LoginPage(WebDriver driver){
 	@FindBy(xpath = "//button[text()=' Got it!']")
 	WebElement gotItButton;
 	
-	@FindBy(xpath = "//div[@class='col-md-8']")
+	@FindBy(xpath = "//div[text()='MedoPract']")
 	WebElement accInfo;
 	
 	@FindBy(xpath="//input[@class='authCommon_checkbox__3oYxx']")
@@ -87,6 +87,7 @@ public LoginPage(WebDriver driver){
 		 rememberMeBtn.click();
 	}
 
+	
 	
 	}
 

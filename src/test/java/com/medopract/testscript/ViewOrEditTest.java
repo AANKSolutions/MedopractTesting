@@ -7,13 +7,13 @@ import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.poi.EncryptedDocumentException;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.medopract.generic.BaseClass;
-import com.medopract.generic.FileLib;
 import com.medopract.pom.AddPatientPage;
 import com.medopract.pom.LoginPage;
 import com.medopract.pom.ViewOrEditPage;
@@ -21,37 +21,18 @@ import com.medopract.pom.ViewOrEditPage;
 
 public class ViewOrEditTest extends BaseClass{
 	Logger logger= LogManager.getLogger(ViewOrEditTest.class);
-	String url;
-	String un;
-	String pw;
-	String ViewOrEdit_Name;
-	String ViewOredit_Phno;
-	String ViewOrEdit_EmergencyPhno;
-	String ViewOrEdit_UpdateEmergencyPhno;
-	String ViewOrEdit_Address;
-	
 
 	@BeforeClass
 	public void OpenApplication() throws  IOException {
-		driver= initializeDriver();
-	    String url = f.getPropertyData("url");
-		String un = f.getPropertyData("un");
-		String pw = f.getPropertyData("pw");
-		 ViewOrEdit_Name=f.getExcelData("View or Edit", 1, 1);
-		 ViewOredit_Phno=f.getExcelData("View or Edit", 2, 1);
-		 ViewOrEdit_EmergencyPhno=f.getExcelData("View or Edit", 3, 1);
-		 ViewOrEdit_UpdateEmergencyPhno=f.getExcelData("View or Edit", 5, 1);
-		 ViewOrEdit_Address=f.getExcelData("View or Edit", 4, 1);
-	
-		 
-		driver.get(url);
+		driver= initializeDriver(); 
+		driver.get(getPropertyData("url"));
 		logger.info("Navigated to Application URL");
-
+		base=new BaseClass();
 		LoginPage l=new LoginPage(driver);
 		l.getGotItButton();
-		l.setUsername(un); 
+		l.setUsername(getPropertyData("un")); 
 		logger.info("Entered UserName Field");
-		l.setPassword(pw);
+		l.setPassword(getPropertyData("pw"));
 		logger.info("Entered Password Field");
 		l.getSubmitButton();
 		logger.info("Clicked Submit Button");
@@ -68,7 +49,7 @@ public class ViewOrEditTest extends BaseClass{
 	}
 
 	@Test(priority=1)
-	public void deleteList() throws  AWTException {
+	public void deleteList() throws  AWTException, EncryptedDocumentException, IOException {
 		AddPatientPage ap=new AddPatientPage(driver);
 		ap.getPatientsClick();
 		logger.info("Clicking Add Patient");
@@ -76,7 +57,7 @@ public class ViewOrEditTest extends BaseClass{
 		ViewOrEditPage voe=new ViewOrEditPage(driver);
 		voe.getViewOrEdit();
 		logger.info("Clicked View or edit");
-		voe.getPatientNameField().sendKeys(ViewOrEdit_Name);
+		voe.getPatientNameField().sendKeys(getExcelData("View or Edit", 1, 1));
 		logger.info("Entered Patient Name");
 		voe.getDeleteButtonClick();
 		logger.info("Clicked delete button");
@@ -110,17 +91,17 @@ public class ViewOrEditTest extends BaseClass{
 	}
 
 	@Test(priority  =3)
-	public void updateContactField() throws  AWTException {
+	public void updateContactField() throws  AWTException, EncryptedDocumentException, IOException {
 
 		ViewOrEditPage voe=new ViewOrEditPage(driver);
 		AddPatientPage ap=new AddPatientPage(driver);
 		ap.getPhoneNoField().clear();
-		ap.getPhoneNoField().sendKeys(ViewOredit_Phno);
+		ap.getPhoneNoField().sendKeys(getExcelData("View or Edit", 2, 1));
 		ap.getEmergencyField().clear();
-		ap.getEmergencyField().sendKeys(ViewOrEdit_EmergencyPhno);
+		ap.getEmergencyField().sendKeys(getExcelData("View or Edit", 3, 1));
 		voe.getUpdateButtonClick();
 		logger.info("Clicked Update Button");
-		
+
 		String actual="Patient record updated successfully!";
 		String expected=voe.getsuccessUpdateMsg().getText();
 		Assert.assertEquals(actual, expected);
@@ -128,8 +109,8 @@ public class ViewOrEditTest extends BaseClass{
 		voe.getcancelNotification();
 		logger.info("Clicked Cancel Notification");
 	}
-	
-	
+
+
 	@Test(priority =4)
 	public void withoutAddressField() {
 		ViewOrEditPage voe=new ViewOrEditPage(driver);
@@ -137,9 +118,9 @@ public class ViewOrEditTest extends BaseClass{
 		ap.getAddressField().clear();
 		voe.getUpdateButtonClick();
 		logger.info("Clicked Update Button");
-		
+
 	}
-	
+
 	@Test(priority=5)
 	public void withoutMandatoryData() throws  AWTException {
 		ViewOrEditPage voe=new ViewOrEditPage(driver);
@@ -155,7 +136,7 @@ public class ViewOrEditTest extends BaseClass{
 		r.keyPress(KeyEvent.VK_LEFT);
 		r.keyRelease(KeyEvent.VK_LEFT);
 		r.keyRelease(KeyEvent.VK_ALT);
-		
+
 		String actual="Please provide required inputs";
 		String expected=voe.geterrorUpdateMsg().getText();
 		Assert.assertEquals(actual, expected);
